@@ -6,7 +6,7 @@ const port = 8000;
 const hostname = '127.0.0.1';
 const database = 'cmuclassrater';
 const username = 'root';
-const password = 'alonealoha5';
+const password = '';
 
 // connect database
 const sequelize = new Sequelize(database, username, password, {
