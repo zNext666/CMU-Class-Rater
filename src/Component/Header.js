@@ -6,7 +6,7 @@ function Header(){
     return(
         <header>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">CMU Class Rater</Navbar.Brand>
+                <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
                 <Nav.Link href="home">Home</Nav.Link>
                 <Nav.Link href="Review">Review</Nav.Link>
             </Navbar>
