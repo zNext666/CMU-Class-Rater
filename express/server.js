@@ -1,18 +1,25 @@
 const express = require('express')
 const Sequelize = require('sequelize');
+const Model = Sequelize.Model;
 const app = express()
 
 const port = 8000;
 const hostname = '127.0.0.1';
 const database = 'cmuclassrater';
 const username = 'root';
-const password = '';
+const password = 'alonealoha5';
 
 // connect database
 const sequelize = new Sequelize(database, username, password, {
   host: hostname,
   dialect: 'mariadb',
-  dialectOptions: {connectTimeout: 1000}
+  dialectOptions: {connectTimeout: 1000},
+  define: {
+    // The `timestamps` field specify whether or not the `createdAt` and `updatedAt` fields will be created.
+    // This was true by default, but now is false by default
+    timestamps: true
+  }
+
 });
 
 // test connection
@@ -26,13 +33,95 @@ sequelize
   });
 
 
-// import model
-const User = sequelize.import( __dirname + "/model/user.js");
-//const ReviewModel = require('./model/review');
-//const CourseModel = require('./model/course');
+// Model
+class User extends Model {}
+User.init({
+  username: {
+    type: Sequelize.DataTypes.STRING(100),
+    allowNull: false
+  },
+  password: {
+      type: Sequelize.DataTypes.STRING(1024),
+      allowNull: false
+  }
+}, {
+  sequelize,
+  modelName: 'user',
+  timestamps: true
+});
+
+class Course extends Model {}
+Course.init({
+    course_no: {
+        type: Sequelize.DataTypes.STRING(40),
+        allowNull: false
+    },
+    name: {
+        type: Sequelize.DataTypes.STRING(200),
+        allowNull: false
+    }
+},{
+    sequelize,
+    modelName: 'course',
+    timestamps: true
+});
+
+class Section extends Model {}
+Section.init({
+    sec_no :{
+        type: Sequelize.DataTypes.STRING(10),
+        allowNull: false
+    }
+},{
+    sequelize,
+    modelName: 'section',
+    timestamps: true
+});
+
+class Teacher extends Model {}
+Teacher.init({
+    name: {
+        type: Sequelize.DataTypes.STRING(100),
+        allowNull: false
+    }
+},{
+    sequelize,
+    modelName: 'teacher',
+    timestamps: true
+});
+class Review extends Model {}
+Review.init({
+    rate: {
+        type: Sequelize.DataTypes.FLOAT,
+        allowNull: false
+    },
+    commend: {
+        type: Sequelize.DataTypes.TEXT,
+        allowNull: false
+    }
+},{
+    sequelize,
+    modelName: 'review',
+    timestamps: true
+});
+
+// Associations
+
+User.hasMany(Review);
+Review.belongsTo(User);
+
+Course.hasMany(Review);
+Review.belongsTo(Course);
+
+Course.hasMany(Section);
+Section.belongsTo(Course);
+
+Section.hasMany(Teacher);
+Teacher.hasMany(Section);
+
+//const User = sequelize.import("model/user");
 
 // Sync
-User.sync();
 
 // run express
 app.listen(port, () => console.log(`CMU-Class-Rater API listening on port ${port}!`))
