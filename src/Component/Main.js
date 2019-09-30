@@ -1,9 +1,10 @@
 import React from 'react'
+import ListCourse from './ListCourse'
 
 function Main(){
     return (
         <main>
-            Home page...
+            <ListCourse />
         </main>
     )
 }
