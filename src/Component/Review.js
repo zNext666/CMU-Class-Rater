@@ -7,14 +7,25 @@ class Review extends Component{
         super()
         this.state = {
             rate:[],
-            review:[]
+            review:[],
+            comment:[{
+                    user: "Prathompong",
+                    rating: 5,
+                    comment:"Good course!!"
+                },
+                {
+                    user: "Pengine",
+                    rating: 4.5,
+                    comment:"Good teacher!!"
+                }
+            ]
         }
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
     onSubmit(){
-        alert(this.state.rate + this.state.review)
+        alert('rate: '+  this.state.rate + ' comment: ' + this.state.review)
     }
 
     handleChange(e){
@@ -22,11 +33,18 @@ class Review extends Component{
     }
 
     render(){
+        const comment = this.state.comment.map(comm => (
+            <Card.Body>
+                <h5>{comm.user}</h5>
+                <Rating initialRating={comm.rating} readonly />
+                <p>{comm.comment}</p>
+            </Card.Body>        
+        ))
         return (
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
                 <Tab eventKey="Comment" title="Comment">
                     <Card>
-                        <Card.Body>Other comment...</Card.Body>
+                        {comment}
                     </Card>               
                 </Tab>
                 <Tab eventKey="Review" title="Review">
