@@ -20,6 +20,7 @@ class Course extends Component{
             <Card>
                 <Card.Body>
                     <Card.Title>{this.state.courses.id} {this.state.courses.name}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">Section: {this.state.courses.section}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{this.state.courses.teacher}</Card.Subtitle>
                     <Card.Text>
                         {this.state.courses.description}

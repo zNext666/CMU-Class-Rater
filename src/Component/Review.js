@@ -6,18 +6,19 @@ class Review extends Component{
     constructor(){
         super()
         this.state = {
-            rate:[]
+            rate:[],
+            review:[]
         }
-        this.handleClick = this.handleClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onSubmit(){
+        alert(this.state.rate + this.state.review)
     }
 
     handleChange(e){
         this.state.rate = e
-    }
-
-    handleClick(){
-        alert(this.state.rate)
     }
 
     render(){
@@ -29,9 +30,11 @@ class Review extends Component{
                     </Card>               
                 </Tab>
                 <Tab eventKey="Review" title="Review">
-                    <Rating onChange={(rate) => this.handleChange(rate)} fractions={2} />
-                    <Form.Control as="textarea" rows="3" placeholder="Write a review..."/>
-                    <Button variant="primary" onClick={this.handleClick}>Review</Button>
+                    <Form>
+                        <Rating onChange={(rate) => this.handleChange(rate)} fractions={2} />
+                        <Form.Control onChange={event => this.setState({review: event.target.value})} as="textarea" rows="3" placeholder="Write a review..."/>
+                        <Button variant="primary" onClick={this.onSubmit} >Review</Button>
+                    </Form>
                 </Tab>
             </Tabs>
         )
