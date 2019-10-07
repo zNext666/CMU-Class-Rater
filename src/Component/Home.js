@@ -11,7 +11,7 @@ export default function Page(){
         <Router>
             <>
             <Header />
-            <Route exact path="/" path="/home" component={Home}></Route>
+            <Route exact path="/" component={Home}></Route>
             <Route path="/review" component={Reviewpage}></Route>
             </>
         </Router>
@@ -26,7 +26,7 @@ function Home(){
         </>
     )
 }
-  
+
 function Reviewpage(){
     return(
         <>
