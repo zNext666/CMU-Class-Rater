@@ -3,7 +3,7 @@ import React from 'react'
 function Footer(){
     return (
         <footer>
-            Footer content...
+            CMU Class Rater is licensed under the GNU General Public License v3.0
         </footer>
     )
 }
