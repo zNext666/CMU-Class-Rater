@@ -17,7 +17,7 @@ class ListCourse extends Component{
     render(){
         return (
             <a href="/review">
-                <Card>
+                <Card style={{ width: '18rem' }}>
                     <Card.Body>
                         <Card.Title>{this.state.courses.id} {this.state.courses.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">Section: {this.state.courses.section}</Card.Subtitle>
