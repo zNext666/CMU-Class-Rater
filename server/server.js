@@ -36,7 +36,8 @@ server.get('/courses',(req,res) => {
 
 server.get('/reviews/:course',(req,res) => {
   Review.findAll({
-    attributes : ['id','user','rate','comment','createdAt']
+    attributes : ['id','user','rate','comment','createdAt'],
+    order: sequelize.literal('createdAt DESC')
   }).then((data) => {
     console.log(data)
     res.json(data)
