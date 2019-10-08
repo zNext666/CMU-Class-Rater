@@ -1,0 +1,10 @@
+const express = require('express')
+const router = express.Router()
+const userRouter = require('./userRouter')
+router.get('/ping',(req,res)=>{
+    res.send('Ping Ping Ping ! ! !')
+})
+
+router.use('/user',userRouter)
+
+module.exports = router
