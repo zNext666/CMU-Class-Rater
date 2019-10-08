@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Homepage from './Component/Home';
-import CourseOverview from './Component/CourseOverview'
 
 //ReactDOM.render(<Homepage />, document.getElementById('root'));
 ReactDOM.render(<Homepage />, document.getElementById('root'));
