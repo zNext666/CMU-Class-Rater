@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import Rating from 'react-rating'
 import { Tab, Tabs, Form, Card, Button } from 'react-bootstrap'
 
@@ -8,17 +9,7 @@ class Review extends Component{
         this.state = {
             rate:[],
             review:[],
-            comment:[{
-                    user: "Prathompong",
-                    rating: 5,
-                    comment:"Good course!!"
-                },
-                {
-                    user: "Pengine",
-                    rating: 4.5,
-                    comment:"Good teacher!!"
-                }
-            ]
+            comment:[]
         }
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -32,11 +23,11 @@ class Review extends Component{
 
         const ncomment = await {
             user: auth,
-            rating: this.state.rate,
+            rate: this.state.rate,
             comment: this.state.review
         }
         //console.log(ncomment)
-        this.state.comment.push(ncomment)
+        await axios.post('localhost:8000/review/course', ncomment)
         console.log(this.state.comment)
         //alert('rate: '+  this.state.rate + ' comment: ' + this.state.review)
     }
@@ -45,11 +36,21 @@ class Review extends Component{
         this.state.rate = e
     }
 
+    async componentDidMount(){
+        try {
+            const response = await axios.get('localhost:8000/reviews/'+ )
+            const data = await response.data
+            this.setState({comment:data})
+        } catch (error){
+            console.log(error)
+        }
+    }
+
     render(){
         const comment = this.state.comment.map(comm => (
-            <Card.Body key={comm.user}>
+            <Card.Body key={comm.id}>
                 <h5>{comm.user}</h5>
-                <Rating initialRating={comm.rating} readonly />
+                <Rating initialRating={comm.rate} readonly />
                 <p>{comm.comment}</p>
             </Card.Body>        
         ))
