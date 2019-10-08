@@ -7,6 +7,7 @@ class Review extends Component{
     constructor(){
         super()
         this.state = {
+            course_no: window.location.pathname.split('/')[2],
             rate:[],
             review:[],
             comment:[]
@@ -22,12 +23,13 @@ class Review extends Component{
         }
 
         const ncomment = await {
+            course_no: this.state.course_no,
             user: auth,
             rate: this.state.rate,
             comment: this.state.review
         }
         //console.log(ncomment)
-        await axios.post('localhost:8000/review/course', ncomment)
+        await axios.post('http://localhost:8000/review/course', ncomment)
         console.log(this.state.comment)
         //alert('rate: '+  this.state.rate + ' comment: ' + this.state.review)
     }
@@ -38,9 +40,10 @@ class Review extends Component{
 
     async componentDidMount(){
         try {
-            const response = await axios.get('localhost:8000/reviews/'+ )
+            const response = await axios.get('http://localhost:8000/reviews/' + this.state.course_no)
             const data = await response.data
             this.setState({comment:data})
+            console.log(this.state.course_no)
         } catch (error){
             console.log(error)
         }

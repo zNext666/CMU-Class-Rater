@@ -11,25 +11,27 @@ class ListCourse extends Component{
     }
 
     async componentDidMount(){
-        const response = await axios.get('localhost/courses')
+        const response = await axios.get('http://localhost:8000/courses')
         const data = await response.data
         this.setState({courses:data})
     }
 
     render(){
         const course = this.state.courses.map((item) => (
-            <Card.Title>{item.course_no} {item.name}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Section: {item.section}</Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted">{item.teacher}</Card.Subtitle>
+            <a href={"review/"+ item.course_no} >
+                <Card.Title>{item.course_no} {item.name}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Section: {item.section}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">{item.teacher}</Card.Subtitle>
+            </a>
         ))
         return (
-            <a href="/review">
+            <>
                 <Card style={{ width: '18rem' }}>
                     <Card.Body>
                         {course}
                     </Card.Body>
                 </Card>
-            </a>
+            </>
         )
     }
 }

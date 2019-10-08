@@ -2,6 +2,7 @@ const db = require('./models/index')
 const express = require('express')
 const bodyParser = require('body-parser');
 const server = express()
+const cors = require('cors')
 const PORT = 8000
 const sequelize = db.Sequelize
 const Course = db.Course
@@ -12,9 +13,9 @@ server.use(bodyParser.json());
 
 //support parsing of application/x-www-form-urlencoded post data
 server.use(bodyParser.urlencoded({ extended: true }));
-
+server.use(cors())
 server.get('/course/:course_no',(req,res) => {
-  Course.findAll({
+  Course.findOne({
     attributes : ['id','course_no','name','section','teacher','description'],
     where: {
       course_no:req.params.course_no

@@ -14,9 +14,11 @@ export default function Page(){
             <Route exact path="/" component={Home}></Route>
             <Route path="/review" component={Reviewpage}></Route>
             </>
-        </Router>
+        </Router> 
     )
 }
+
+
 
 function Home(){
     return(
