@@ -1,15 +1,21 @@
-const Sequelize = require('sequelize');
+const db = require('./models/index')
+const express = require('express')
+const server = express()
+const PORT = 8000
+const sequelize = db.Sequelize
+const Course = db.Course
+const Review = db.Review
 
-const sequelize = new Sequelize('cmuclassrater', 'root', 'decade65', {
-  host: 'localhost',
-  dialect: 'mariadb'
-});
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
+server.get('/courses',(req,res) => {
+  Course.findAll({
+    attributes : ['course_no','name','section','teacher','description']
+  }).then((data) => {
+    res.send(data)
   })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+})
+
+server.get('/reviews',(req,res) => {
+
+})
+server.listen(PORT,() => console.log(`CMU class rater server running on PORT ${PORT}!`))
+
