@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Course.associate = function(models) {
     // associations can be defined here
+    Course.hasMany(models.Review);
   };
   return Course;
 };

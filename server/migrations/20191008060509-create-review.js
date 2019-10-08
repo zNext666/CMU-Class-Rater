@@ -17,6 +17,14 @@ module.exports = {
       comment: {
         type: Sequelize.STRING
       },
+      course_id: {
+        type: Sequelize.INTEGER,
+        references: {         // User belongsTo Company 1:1
+          model: 'Courses',
+          key: 'id'
+        }
+      }
+      ,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
