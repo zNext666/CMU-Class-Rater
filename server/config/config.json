@@ -1,24 +1,24 @@
 {
   "development": {
     "username": "root",
-    "password": "alonealoha5",
-    "database": "cmuclassrater_development",
+    "password": "decade65",
+    "database": "cmuclassrater",
     "host": "127.0.0.1",
     "dialect": "mariadb",
     "operatorsAliases": false
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "cmuclassrater_test",
+    "password": "decade65",
+    "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mariadb",
     "operatorsAliases": false
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "cmuclassrater_production",
+    "password": "decade65",
+    "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mariadb",
     "operatorsAliases": false
