@@ -39,7 +39,8 @@ server.get('/reviews/:course_no',(req,res) => {
     attributes : ['id','user','rate','comment','course_no','createdAt'],
     where: {
       course_no:req.params.course_no
-    }
+    },order: sequelize.literal('createdAt DESC')
+
   }).then((data) => {
     console.log(data)
     res.json(data)
