@@ -23,9 +23,9 @@ class Review extends Component{
         }
 
         const ncomment = await {
-            course_no: this.state.course_no,
             user: auth,
             rate: this.state.rate,
+            course_no: this.state.course_no,
             comment: this.state.review
         }
         //console.log(ncomment)

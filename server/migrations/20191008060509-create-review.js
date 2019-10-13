@@ -17,11 +17,11 @@ module.exports = {
       comment: {
         type: Sequelize.STRING
       },
-      course_id: {
+      course_no: {
         type: Sequelize.INTEGER,
         references: {         // User belongsTo Company 1:1
           model: 'Courses',
-          key: 'id'
+          key: 'course_no'
         }
       }
       ,

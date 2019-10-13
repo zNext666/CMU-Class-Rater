@@ -16,7 +16,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cors())
 server.get('/course/:course_no',(req,res) => {
   Course.findOne({
-    attributes : ['id','course_no','name','section','teacher','description'],
+    attributes : ['course_no','name','section','teacher','description'],
     where: {
       course_no:req.params.course_no
     }
@@ -27,16 +27,19 @@ server.get('/course/:course_no',(req,res) => {
 })
 server.get('/courses',(req,res) => {
   Course.findAll({
-    attributes : ['id','course_no','name','section','teacher','description']
+    attributes : ['course_no','name','section','teacher','description']
   }).then((data) => {
     console.log(data)
     res.json(data)
   })
 })
 
-server.get('/reviews/:course',(req,res) => {
+server.get('/reviews/:course_no',(req,res) => {
   Review.findAll({
-    attributes : ['id','user','rate','comment','createdAt']
+    attributes : ['id','user','rate','comment','course_no','createdAt'],
+    where: {
+      course_no:req.params.course_no
+    }
   }).then((data) => {
     console.log(data)
     res.json(data)
@@ -48,6 +51,7 @@ server.post('/review/:course',(req,res) => {
     user:req.body.user,
     rate:req.body.rate,
     comment:req.body.comment,
+    course_no:req.body.course_no,
     course:req.params.course
   }).then((data)=>{
     console.log(data)
