@@ -55,15 +55,14 @@ server.post('/review/:course',(req,res) => {
     course_no:req.body.course_no,
     course:req.params.course
   }).then((data)=>{
-    console.log(data)
     res.json(data)
   })
 })
 
 // console log all req
 const logRequestStart = (req, res, next) => {
-  console.info(`${req.method} ${req.originalUrl}`)
-  console.info(`remoteAddress => ${req.connection.remoteAddress}`)
+  console.log(`${req.method} ${req.originalUrl}`)
+  console.log(`remoteAddress => ${req.connection.remoteAddress}`)
   next()
 }
 server.use(logRequestStart)
