@@ -33,6 +33,8 @@ class Header extends Component{
             this.setState({query:query}, () =>{
                 this.getData()
             })
+        }else{
+            this.setState({data:[]})
         }
     }
 
