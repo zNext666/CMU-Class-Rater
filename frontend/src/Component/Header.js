@@ -4,8 +4,6 @@ import axios from 'axios'
 import {Nav,Form,Navbar,FormControl,Button} from 'react-bootstrap';
 import {Container,Row,Col,ListGroup}  from 'react-bootstrap';
 
-
-
 class Header extends Component{
 
     constructor(){
@@ -36,6 +34,14 @@ class Header extends Component{
         })
     }
 
+    filterUrl = (param) => {
+        if(window.location.href.search('review') < 1){
+            return "review/"+ param
+        }else{
+            return param
+        }
+    }
+
     render(){
         const style={
             position:'absolute',
@@ -47,7 +53,7 @@ class Header extends Component{
         }
         const search = this.state.data.map(item => (
             <ListGroup key={item.course_no}>
-                <ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item>
+                <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a>
             </ListGroup>
         ))
         return(
