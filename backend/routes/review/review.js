@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../models/index')
 const Review = db.Review
-router.post('/review/:course',(req,res) => {
+
+router.post('/:course',(req,res) => {
     return Review.create({
       user:req.body.user,
       rate:req.body.rate,

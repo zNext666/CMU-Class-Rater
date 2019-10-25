@@ -12,7 +12,7 @@ class ListCourse extends Component{
     }
 
     async componentDidMount(){
-        const response = await axios.get('http://localhost:8000/courses')
+        const response = await axios.get('http://localhost:8000/api/courses')
         const data = await response.data
         this.setState({courses:data})
     }
