@@ -36,6 +36,10 @@ router.get('/search',(req,res) => {
     }
 
 })
+router.get('/:course_no/summary/average',(req,res) => {
+    
+})
+
 
 router.get('/:course_no',(req,res) => {
     Course.findOne({
