@@ -29,9 +29,11 @@ class Header extends Component{
 
     handleChange = event => {
         const query = event.target.value
-        this.setState({query:query}, () =>{
-            this.getData()
-        })
+        if(query.toString().trim().length != 0){
+            this.setState({query:query}, () =>{
+                this.getData()
+            })
+        }
     }
 
     filterUrl = (param) => {
