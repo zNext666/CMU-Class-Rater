@@ -1,11 +1,41 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios'
 import {Nav,Form,Navbar,FormControl,Button} from 'react-bootstrap';
-import {Container,Row,Col}  from 'react-bootstrap';
+import {Container,Row,Col,ListGroup}  from 'react-bootstrap';
 
 
 
 class Header extends Component{
+
+    constructor(){
+        super()
+        this.state = {
+            query:'',
+            data:[]
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    getData = async () => {       
+        try {
+            const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
+            const data = await response.data
+            this.setState({data:data})
+            console.log(this.state.data)
+            console.log(this.state.query)
+        } catch (error){
+            console.log(error)
+        }
+    }
+
+    handleChange = event => {
+        const query = event.target.value
+        this.setState({query:query}, () =>{
+            this.getData()
+        })
+    }
+
     render(){
         const style={
             position:'absolute',
@@ -15,6 +45,11 @@ class Header extends Component{
         if(sessionStorage.getItem('auth')){
             auth = sessionStorage.getItem('auth')
         }
+        const search = this.state.data.map(item => (
+            <ListGroup key={item.course_no}>
+                <ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item>
+            </ListGroup>
+        ))
         return(
             <header>
                 <Navbar bg="light" expand="lg">
@@ -28,7 +63,8 @@ class Header extends Component{
                 </Col>
                 <Col>
                 <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
+                    {search}
                     <Button variant="outline-success">Search</Button>
                 </Form>
                 </Col>
