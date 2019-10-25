@@ -13,7 +13,7 @@ class Course extends Component{
 
     async componentDidMount(){
         try {
-            const response = await axios.get('http://localhost:8000/course/' + this.state.course_no)
+            const response = await axios.get('http://localhost:8000/api/course/' + this.state.course_no)
             const data = await response.data
             this.setState({item:data})
             console.log(this.state.item)

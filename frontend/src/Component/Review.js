@@ -29,7 +29,7 @@ class Review extends Component{
             comment: this.state.review
         }
         //console.log(ncomment)
-        await axios.post('http://localhost:8000/review/course', ncomment)
+        await axios.post('http://localhost:8000/api/review/course', ncomment)
         console.log(this.state.comment)
         //alert('rate: '+  this.state.rate + ' comment: ' + this.state.review)
     }
@@ -40,7 +40,7 @@ class Review extends Component{
 
     async componentDidMount(){
         try {
-            const response = await axios.get('http://localhost:8000/reviews/' + this.state.course_no)
+            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no)
             const data = await response.data
             this.setState({comment:data})
             console.log(this.state.course_no)
