@@ -21,7 +21,7 @@
     "express-list-endpoints": "^4.0.1",
     "mariadb": "^2.1.1",
     "nodemon": "^1.19.3",
-    "sequelize": "^5.19.6",
+    "sequelize": "^5.21.1",
     "sequelize-auto-migrations": "^1.0.3",
     "sequelize-cli": "^5.5.1"
   }
