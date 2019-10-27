@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "alonealoha5",
+    "password": "root",
     "database": "cmuclassrater",
     "host": "127.0.0.1",
     "dialect": "mariadb",
