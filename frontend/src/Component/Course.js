@@ -8,10 +8,9 @@ class Course extends Component{
         this.state = {
             course_no: window.location.pathname.split('/')[2],
             item:[],
-            avg:[]
+            avg:[],
+            sum:[]
         }
-        this.getCourse = this.getCourse.bind(this)
-        this.getAvg = this.getAvg.bind(this)
     }
 
     getCourse = async() =>{
@@ -36,12 +35,30 @@ class Course extends Component{
         }
     }
 
+    getSum = async() =>{
+        try {
+            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary')
+            const data = await response.data
+            this.setState({sum:data})
+            console.log(this.state.sum)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async componentDidMount(){
         this.getCourse()
         this.getAvg()
+        this.getSum()
     }
 
     render(){
+        const sum = this.state.sum.map((item) => (
+            <>
+                <p>Rate: {item.rate}</p>
+                <p>Count: {item.count}</p>
+            </>
+        ))
         return (
             <Card>
                 <Card.Body>
@@ -53,6 +70,7 @@ class Course extends Component{
                     </Card.Text>
                     <Card.Text>
                     Course: {this.state.avg.course_no} Average: {this.state.avg.average}
+                    {sum}
                     </Card.Text>
                 </Card.Body>
             </Card>
