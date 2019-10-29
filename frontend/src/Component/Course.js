@@ -7,11 +7,13 @@ class Course extends Component{
         super()
         this.state = {
             course_no: window.location.pathname.split('/')[2],
-            item:[]
+            item:[],
+            avg:[],
+            sum:[]
         }
     }
 
-    async componentDidMount(){
+    getCourse = async() =>{
         try {
             const response = await axios.get('http://localhost:8000/api/course/' + this.state.course_no)
             const data = await response.data
@@ -22,7 +24,41 @@ class Course extends Component{
         }
     }
 
+    getAvg = async() =>{
+        try {
+            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary/average')
+            const data = await response.data
+            this.setState({avg:data})
+            console.log(this.state.avg)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    getSum = async() =>{
+        try {
+            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary')
+            const data = await response.data
+            this.setState({sum:data})
+            console.log(this.state.sum)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async componentDidMount(){
+        this.getCourse()
+        this.getAvg()
+        this.getSum()
+    }
+
     render(){
+        const sum = this.state.sum.map((item) => (
+            <>
+                <p>Rate: {item.rate}</p>
+                <p>Count: {item.count}</p>
+            </>
+        ))
         return (
             <Card>
                 <Card.Body>
@@ -31,6 +67,10 @@ class Course extends Component{
                     <Card.Subtitle className="mb-2 text-muted">{this.state.item.teacher}</Card.Subtitle>
                     <Card.Text>
                         {this.state.item.description}
+                    </Card.Text>
+                    <Card.Text>
+                    Course: {this.state.avg.course_no} Average: {this.state.avg.average}
+                    {sum}
                     </Card.Text>
                 </Card.Body>
             </Card>
