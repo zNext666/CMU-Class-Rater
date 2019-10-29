@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Rating from 'react-rating'
-import { Tab, Tabs, Form, Card, Button } from 'react-bootstrap'
+import { Form, Card, Button } from 'react-bootstrap'
+import {ListItemSecondaryAction} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
+import {ThumbUpAlt} from '@material-ui/icons';
+import {List} from '@material-ui/core';
 
 class Review extends Component{
     constructor(){
@@ -52,26 +56,29 @@ class Review extends Component{
     render(){
         const comment = this.state.comment.map(comm => (
             <Card.Body key={comm.id}>
+                <List>
                 <h5>{comm.user}</h5>
                 <Rating initialRating={comm.rate} readonly />
                 <p>{comm.comment}</p>
+                <ListItemSecondaryAction>
+                    <IconButton edge="end">
+                      <ThumbUpAlt />
+                    </IconButton>
+                </ListItemSecondaryAction>
+                </List>
             </Card.Body>        
         ))
         return (
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                <Tab eventKey="Comment" title="Comment">
-                    <Card>
-                        {comment}
-                    </Card>               
-                </Tab>
-                <Tab eventKey="Review" title="Review">
-                    <Form>
-                        <Rating onChange={(rate) => this.handleChange(rate)} fractions={2} />
-                        <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
-                        <Button type="submit" variant="primary" onClick={this.onSubmit} >Review</Button>
-                    </Form>
-                </Tab>
-            </Tabs>
+            <div>
+            <Form>
+                <Rating onChange={(rate) => this.handleChange(rate)} />
+                <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
+                <Button type="submit" variant="primary" onClick={this.onSubmit} >Submit</Button>
+            </Form>
+            <Card>
+                {comment}
+            </Card>        
+            </div>
         )
     }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import axios from 'axios'
+import Chart from './Chart'
 
 class Course extends Component{
     constructor() {
@@ -72,6 +73,7 @@ class Course extends Component{
                     Course: {this.state.avg.course_no} Average: {this.state.avg.average}
                     {sum}
                     </Card.Text>
+                    <Chart />
                 </Card.Body>
             </Card>
         )
