@@ -7,11 +7,14 @@ class Course extends Component{
         super()
         this.state = {
             course_no: window.location.pathname.split('/')[2],
-            item:[]
+            item:[],
+            avg:[]
         }
+        this.getCourse = this.getCourse.bind(this)
+        this.getAvg = this.getAvg.bind(this)
     }
 
-    async componentDidMount(){
+    getCourse = async() =>{
         try {
             const response = await axios.get('http://localhost:8000/api/course/' + this.state.course_no)
             const data = await response.data
@@ -20,6 +23,22 @@ class Course extends Component{
         } catch (error){
             console.log(error)
         }
+    }
+
+    getAvg = async() =>{
+        try {
+            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary/average')
+            const data = await response.data
+            this.setState({avg:data})
+            console.log(this.state.avg)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async componentDidMount(){
+        this.getCourse()
+        this.getAvg()
     }
 
     render(){
@@ -31,6 +50,9 @@ class Course extends Component{
                     <Card.Subtitle className="mb-2 text-muted">{this.state.item.teacher}</Card.Subtitle>
                     <Card.Text>
                         {this.state.item.description}
+                    </Card.Text>
+                    <Card.Text>
+                    Course: {this.state.avg.course_no} Average: {this.state.avg.average}
                     </Card.Text>
                 </Card.Body>
             </Card>
