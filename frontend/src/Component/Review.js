@@ -6,6 +6,9 @@ import {ListItemSecondaryAction} from '@material-ui/core';
 import {IconButton} from '@material-ui/core';
 import {ThumbUpAlt} from '@material-ui/icons';
 import {List} from '@material-ui/core';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component'
 
 class Review extends Component{
     constructor(){
@@ -20,7 +23,7 @@ class Review extends Component{
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    async onSubmit(){
+    async onSubmit(e){
         const auth = 'Anonymous'
         if(sessionStorage.getItem('auth')){
             auth = sessionStorage.getItem('auth')
@@ -34,6 +37,20 @@ class Review extends Component{
         }
         //console.log(ncomment)
         await axios.post('http://localhost:8000/api/review/course', ncomment)
+        store.addNotification({
+            title: "Success!",
+            message: auth + ' comment success!',
+            type: "success",
+            insert: "top",
+            container: "top-left",
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+              duration: 4000,
+              onScreen: true
+            }
+          });
+          this.getComment()
         console.log(this.state.comment)
         //alert('rate: '+  this.state.rate + ' comment: ' + this.state.review)
     }
@@ -42,7 +59,7 @@ class Review extends Component{
         this.state.rate = e
     }
 
-    async componentDidMount(){
+    getComment = async() =>{
         try {
             const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no)
             const data = await response.data
@@ -53,7 +70,11 @@ class Review extends Component{
         }
     }
 
-    render(){
+    async componentDidMount(){
+        this.getComment()
+    }
+
+    render(){      
         const comment = this.state.comment.map(comm => (
             <Card.Body key={comm.id}>
                 <List>
@@ -69,8 +90,9 @@ class Review extends Component{
             </Card.Body>        
         ))
         return (
-            <div>
-            <Form>
+            <>
+            <ReactNotification />
+            <Form onSubmit={e => {e.preventDefault()}}>
                 <Rating onChange={(rate) => this.handleChange(rate)} />
                 <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
                 <Button type="submit" variant="primary" onClick={this.onSubmit} >Submit</Button>
@@ -78,7 +100,7 @@ class Review extends Component{
             <Card>
                 {comment}
             </Card>        
-            </div>
+            </>
         )
     }
 }
