@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import {Nav,Form,Navbar,FormControl,Button} from 'react-bootstrap';
-import {Container,Row,Col,ListGroup}  from 'react-bootstrap';
+import {ListGroup}  from 'react-bootstrap';
+import {Col}  from 'react-bootstrap';
+import {NavDropdown }  from 'react-bootstrap';
 
 class Header extends Component{
 
@@ -63,8 +65,8 @@ class Header extends Component{
         return(
             <header>
                 <Navbar bg="light" expand="lg">
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
@@ -72,14 +74,22 @@ class Header extends Component{
                 </Nav>
                 </Col>
                 <Col>
+                <Nav className="justify-content-center">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
                     {search}
                     <Button variant="outline-success">Search</Button>
                 </Form>
+                </Nav>
                 </Col>
                 <Col>
-                <p style={style}>{auth}</p>
+                <Nav className="justify-content-end">
+                <NavDropdown title={auth} id="collasible-nav-dropdown">
+                    <NavDropdown.Item href="#action/3.1">{auth}</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action/3.4">logout</NavDropdown.Item>
+                </NavDropdown>
+                </Nav>
                 </Col>
                 </Navbar.Collapse>
                 </Navbar>
