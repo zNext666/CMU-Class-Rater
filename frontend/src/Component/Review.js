@@ -9,7 +9,7 @@ import {List} from '@material-ui/core';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component'
-
+import {Navbar} from 'react-bootstrap'
 class Review extends Component{
     constructor(){
         super()
@@ -79,13 +79,15 @@ class Review extends Component{
             <Card.Body key={comm.id}>
                 <List>
                 <h5>{comm.user}</h5>
+                <Navbar>
                 <Rating initialRating={comm.rate} readonly />
-                <p>{comm.comment}</p>
                 <ListItemSecondaryAction>
                     <IconButton edge="end">
                       <ThumbUpAlt />
                     </IconButton>
                 </ListItemSecondaryAction>
+                </Navbar>
+                <p>{comm.comment}</p>
                 </List>
             </Card.Body>        
         ))
