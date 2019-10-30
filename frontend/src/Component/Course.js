@@ -73,7 +73,7 @@ class Course extends Component{
                     Course: {this.state.avg.course_no} Average: {this.state.avg.average}
                     {sum}
                     </Card.Text>
-                    <Chart />
+                    <Chart summary={this.state.sum} />
                 </Card.Body>
             </Card>
         )

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
+import { ThemeProvider } from "react-bootstrap";
+import { array } from "prop-types";
 
 class App extends Component {
   constructor(props) {
@@ -11,19 +13,30 @@ class App extends Component {
           id: "basic-bar"
         },
         xaxis: {
-          categories: [5, 4, 3, 2, 1]
+          categories: [ 1, 2, 3, 4,5]
         }
       },
-      series: [
-        {
-          name: "series-1",
-          data: [50, 40, 45, 50, 49]
-        }
-      ]
+      series: null
     };
   }
 
   render() {
+    var tempcount=[0,0,0,0,0,0]
+    var tempArr = this.props.summary
+    var tempObj
+    for(var i = 0; i < tempArr.length; i++){
+        tempObj = tempArr[i]
+        //console.log(this.props.summary[i])
+        tempcount[Math.floor(tempObj.rate)] += tempObj.count
+    }
+    tempcount.shift()
+    tempObj = [{
+      name:"summary",
+      data:tempcount
+    }]   
+    this.state.series = tempObj
+    console.log(this.state.series)
+
     return (
       <div className="app">
         <div className="row">
@@ -31,6 +44,8 @@ class App extends Component {
             <Chart
               options={this.state.options}
               series={this.state.series}
+              //series={this.props.summary}
+              
               type="bar"
               width="500"
             />
