@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       comment: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       course_no: {
         type: Sequelize.INTEGER,

@@ -98,6 +98,7 @@ class Course extends Component{
                     Course: {this.state.avg.course_no} Average: {parseFloat(this.state.avg.average).toFixed(2)}
                     {sum}
                     </Card.Text>
+<<<<<<< HEAD
                     <div className="app">
                         <div className="row">
                             <div className="mixed-chart">
@@ -110,6 +111,9 @@ class Course extends Component{
                             </div>
                         </div>
                     </div>
+=======
+                    <Chart summary={this.state.sum} />
+>>>>>>> f500ecfe50cef5855d7144f7775d6da2803df692
                 </Card.Body>
             </Card>
         )
