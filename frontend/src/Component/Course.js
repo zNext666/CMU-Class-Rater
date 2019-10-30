@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import axios from 'axios'
-import Chart from './Chart'
+import Chart from "react-apexcharts";
 
 class Course extends Component{
     constructor() {
@@ -10,7 +10,22 @@ class Course extends Component{
             course_no: window.location.pathname.split('/')[2],
             item:[],
             avg:[],
-            sum:[]
+            sum:[],
+            
+            options: {
+                chart: {
+                  id: "basic-bar"
+                },
+                xaxis: {
+                  categories: [5, 4, 3, 2, 1]
+                }
+            },
+            series: [
+                {
+                  name: "series-1",
+                  data: [50, 40, 45, 50, 49]
+                }
+            ]
         }
     }
 
@@ -47,10 +62,20 @@ class Course extends Component{
         }
     }
 
+    test = () =>{
+        let series = []
+        this.state.sum.map((item) => {
+            series.push(item.count)
+        })
+        console.log(series)
+        return series
+    }
+
     async componentDidMount(){
         this.getCourse()
         this.getAvg()
         this.getSum()
+        this.test()
     }
 
     render(){
@@ -70,10 +95,21 @@ class Course extends Component{
                         {this.state.item.description}
                     </Card.Text>
                     <Card.Text>
-                    Course: {this.state.avg.course_no} Average: {this.state.avg.average}
+                    Course: {this.state.avg.course_no} Average: {parseFloat(this.state.avg.average).toFixed(2)}
                     {sum}
                     </Card.Text>
-                    <Chart />
+                    <div className="app">
+                        <div className="row">
+                            <div className="mixed-chart">
+                                <Chart
+                                options={this.state.options}
+                                series={this.state.series}
+                                type="bar"
+                                width="500"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </Card.Body>
             </Card>
         )

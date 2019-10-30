@@ -6,6 +6,7 @@ import {ListItemSecondaryAction} from '@material-ui/core';
 import {IconButton} from '@material-ui/core';
 import {ThumbUpAlt} from '@material-ui/icons';
 import {List} from '@material-ui/core';
+import {Nav,Navbar} from 'react-bootstrap';
 
 class Review extends Component{
     constructor(){
@@ -58,13 +59,15 @@ class Review extends Component{
             <Card.Body key={comm.id}>
                 <List>
                 <h5>{comm.user}</h5>
+                <Navbar>
                 <Rating initialRating={comm.rate} readonly />
-                <p>{comm.comment}</p>
                 <ListItemSecondaryAction>
                     <IconButton edge="end">
                       <ThumbUpAlt />
                     </IconButton>
                 </ListItemSecondaryAction>
+                </Navbar>
+                <p>{comm.comment}</p>
                 </List>
             </Card.Body>        
         ))
