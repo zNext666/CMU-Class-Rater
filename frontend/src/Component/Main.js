@@ -1,8 +1,11 @@
 import React from 'react'
 import ListCourse from './ListCourse'
+import SearchCourse from './SearchCourse'
+import Footer from './Footer'
 import {Nav,Navbar,NavDropdown} from 'react-bootstrap';
 import {Row ,Col}  from 'react-bootstrap';
 import {Pagination } from 'react-bootstrap'
+import {BrowserRouter as Router, Route, Link,Switch} from 'react-router-dom'
 
 function Main(){
     return (
@@ -32,7 +35,12 @@ function Main(){
                     </Pagination>
                 </Col>
             </Row>
-            <ListCourse />
+            <Router>
+                <Switch>
+                    <Route path="/search" component={SearchCourse}></Route>
+                    <Route path="/" component={ListCourse}></Route>
+                </Switch>
+            </Router>
         </main>
     )
 }

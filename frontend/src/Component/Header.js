@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
-import {Nav,Form,Navbar,FormControl,Button} from 'react-bootstrap';
+import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { Switch } from '@material-ui/core';
 
 class Header extends Component{
 
@@ -15,6 +17,12 @@ class Header extends Component{
             data:[]
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handleClickSearch = this.handleClickSearch.bind(this)
+    }
+
+    handleClickSearch = () =>{
+        window.location = '/search/'+this.state.query   
+        console.log(this.state.query)
     }
 
     getData = async () => {       
@@ -58,9 +66,7 @@ class Header extends Component{
             auth = sessionStorage.getItem('auth')
         }
         const search = this.state.data.map(item => (
-            <ListGroup key={item.course_no}>
-                <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a>
-            </ListGroup>
+                <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
         return(
             <header>
@@ -77,8 +83,8 @@ class Header extends Component{
                 <Nav className="justify-content-center">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
-                    {search}
-                    <Button variant="outline-success">Search</Button>
+                    <Dropdown>{search}</Dropdown>
+                    <Button variant="outline-success" onClick={this.handleClickSearch}>Search</Button>
                 </Form>
                 </Nav>
                 </Col>
