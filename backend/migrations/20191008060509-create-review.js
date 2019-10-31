@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user: {
-        type: Sequelize.STRING
-      },
       rate: {
         type: Sequelize.DOUBLE
       },
@@ -23,8 +20,14 @@ module.exports = {
           model: 'Courses',
           key: 'course_no'
         }
-      }
-      ,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {         // User belongsTo Company 1:1
+          model: 'Users',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
