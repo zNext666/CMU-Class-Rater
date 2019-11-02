@@ -1,7 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
-    user: DataTypes.STRING,
+    username: DataTypes.STRING,
+    title: DataTypes.STRING,
     rate: DataTypes.DOUBLE,
     comment: DataTypes.TEXT,
     course_no: DataTypes.INTEGER
@@ -9,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   Review.associate = function(models) {
     // associations can be defined here
     Review.belongsTo(models.Course);
+    Review.belongsTo(models.User);
+    Review.hasMany(models.Like);
   };
   return Review;
 };
