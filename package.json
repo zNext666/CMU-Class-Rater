@@ -25,6 +25,8 @@
     "mariadb": "^2.1.2",
     "nodemon": "^1.19.4",
     "react-apexcharts": "^1.3.3",
+    "react-notifications-component": "^2.1.0",
+    "react-select": "^2.0.0-beta.7",
     "sequelize": "^5.21.1",
     "sequelize-auto-migrations": "^1.0.3",
     "sequelize-cli": "^5.5.1"
