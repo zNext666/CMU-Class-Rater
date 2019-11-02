@@ -93,6 +93,9 @@ class Header extends Component{
                 <NavDropdown title={auth} id="collasible-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">{auth}</NavDropdown.Item>
                     <NavDropdown.Divider />
+                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                    <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">logout</NavDropdown.Item>
                 </NavDropdown>
                 </Nav>
