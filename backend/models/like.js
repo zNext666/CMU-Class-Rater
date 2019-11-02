@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Like.associate = function(models) {
     // associations can be defined here
-    Review.belongsTo(models.User);
-    Review.belongsTo(models.Review);
+    Like.belongsTo(models.User);
+    Like.belongsTo(models.Review);
   };
   return Like;
 };
