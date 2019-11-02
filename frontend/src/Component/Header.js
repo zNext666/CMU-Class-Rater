@@ -7,6 +7,8 @@ import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import { Switch } from '@material-ui/core';
+import SearchSharpIcon from '@material-ui/icons/SearchSharp';
+import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 
 class Header extends Component{
 
@@ -76,7 +78,7 @@ class Header extends Component{
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/"><HomeSharpIcon/></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
@@ -84,7 +86,7 @@ class Header extends Component{
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
                     <Dropdown>{search}</Dropdown>
-                    <Button variant="outline-success" onClick={this.handleClickSearch}>Search</Button>
+                    <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
                 </Form>
                 </Nav>
                 </Col>

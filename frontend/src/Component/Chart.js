@@ -12,8 +12,13 @@ class App extends Component {
         chart: {
           id: "basic-bar"
         },
+        plotOptions: {
+          bar: {
+              horizontal: true,
+          }
+      },
         xaxis: {
-          categories: [1,1.5,2,2.5,3,3.5,4,4.5,5]
+          categories: [1,2,3,4,5]
         }
       },
       series: null
@@ -21,7 +26,7 @@ class App extends Component {
   }
 
   render() {
-    var tempcount=[0,0,0,0,0,0,0,0,0,0]
+    var tempcount=[0,0,0,0,0]
     var tempArr = this.props.summary
     var tempObj
     for(var i = 0; i < tempArr.length; i++){
@@ -31,30 +36,19 @@ class App extends Component {
         if(tempObj.rate == 1){
           tempcount[1] = tempObj.count
         }
-        if(tempObj.rate == 1.5){
+        if(tempObj.rate == 2){
           tempcount[2] = tempObj.count
         }
-        if(tempObj.rate == 2){
+        if(tempObj.rate == 3){
           tempcount[3] = tempObj.count
         }
-        if(tempObj.rate == 2.5){
+        if(tempObj.rate == 4){
           tempcount[4] = tempObj.count
         }
-        if(tempObj.rate == 3){
+        if(tempObj.rate == 5){
           tempcount[5] = tempObj.count
         }
-        if(tempObj.rate == 3.5){
-          tempcount[6] = tempObj.count
-        }
-        if(tempObj.rate == 4){
-          tempcount[7] = tempObj.count
-        }
-        if(tempObj.rate == 4.5){
-          tempcount[8] = tempObj.count
-        }
-        if(tempObj.rate == 5){
-          tempcount[9] = tempObj.count
-        }
+        
     }
     tempcount.shift()
     tempObj = [{
