@@ -82,7 +82,6 @@ class Course extends Component{
     render(){
         const sum = this.state.sum.map((item) => (
             <>
-               
             </>
         ))
         return (

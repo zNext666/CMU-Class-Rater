@@ -12,11 +12,13 @@ class App extends Component {
         chart: {
           id: "basic-bar"
         },
+
         plotOptions: {
           bar: {
               horizontal: true,
           }
       },
+      
         xaxis: {
           categories: [1,2,3,4,5]
         }

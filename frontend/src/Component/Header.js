@@ -57,7 +57,7 @@ class Header extends Component{
             return param
         }
     }
-
+   
     checkLogin = () =>{
         if(sessionStorage.getItem('auth')){
             return sessionStorage.getItem('auth')
