@@ -52,7 +52,7 @@ class Header extends Component{
 
     filterUrl = (param) => {
         if(window.location.href.search('review') < 1){
-            return "review/"+ param
+            return "../review/"+ param
         }else{
             return param
         }
