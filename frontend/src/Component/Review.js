@@ -94,11 +94,13 @@ class Review extends Component{
         return (
             <>
             <ReactNotification />
+            <br />
             <Form onSubmit={e => {e.preventDefault()}}>
                 <Rating onChange={(rate) => this.handleChange(rate)} />
                 <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
                 <Button type="submit" variant="primary" onClick={this.onSubmit} >Submit</Button>
             </Form>
+            <br />
             <Card>
                 {comment}
             </Card>        

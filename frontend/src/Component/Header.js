@@ -5,8 +5,8 @@ import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import { Switch } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
+import { TextField } from '@material-ui/core';
 
 class Header extends Component{
 
@@ -14,11 +14,12 @@ class Header extends Component{
         super()
         this.state = {
             query:'',
-            data:[]
+            data:[],
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleClickSearch = this.handleClickSearch.bind(this)
     }
+
 
     handleClickSearch = () =>{
         window.location = '/search/'+this.state.query   

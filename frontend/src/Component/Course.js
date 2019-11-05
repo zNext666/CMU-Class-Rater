@@ -11,21 +11,6 @@ class Course extends Component{
             item:[],
             avg:[],
             sum:[],
-            
-            options: {
-                chart: {
-                  id: "basic-bar"
-                },
-                xaxis: {
-                  categories: [5, 4, 3, 2, 1]
-                }
-            },
-            series: [
-                {
-                  name: "series-1",
-                  data: [50, 40, 45, 50, 49]
-                }
-            ]
         }
     }
 
@@ -96,7 +81,7 @@ class Course extends Component{
                     </Card.Text>
                     <Card.Text>
                     Course: {this.state.avg.course_no} Average: {parseFloat(this.state.avg.average).toFixed(2)}
-                    {sum}
+                    {/*{sum}*/}
                     </Card.Text>
 
                     <div className="app">
