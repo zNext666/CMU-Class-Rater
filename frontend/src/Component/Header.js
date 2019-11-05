@@ -56,15 +56,31 @@ class Header extends Component{
         }
     }
 
+    checkLogin = () =>{
+        if(sessionStorage.getItem('auth')){
+            return sessionStorage.getItem('auth')
+        }else{
+            return 'Please login'
+        }
+    }
+
+    navigateProfile = () =>{
+        if(sessionStorage.getItem('auth')){
+            return '/profile'
+        }else{
+            return '/login'
+        }
+    }
+
     render(){
         const style={
             position:'absolute',
             right:'50px'
         }
-        const auth = 'Anonymous'
+        /*const auth = 'Anonymous'
         if(sessionStorage.getItem('auth')){
             auth = sessionStorage.getItem('auth')
-        }
+        }*/
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
@@ -90,8 +106,8 @@ class Header extends Component{
                 </Col>
                 <Col>
                 <Nav className="justify-content-end">
-                <NavDropdown title={auth} id="collasible-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">{auth}</NavDropdown.Item>
+                <NavDropdown title={this.checkLogin()} id="collasible-nav-dropdown">
+                    <NavDropdown.Item href={this.navigateProfile()}>{this.checkLogin()}</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                     <NavDropdown.Item href="/register">Register</NavDropdown.Item>
