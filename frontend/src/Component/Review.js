@@ -76,6 +76,29 @@ class Review extends Component{
         this.getComment()
     }
 
+    checkLoginReview = () =>{
+        if(sessionStorage.getItem('auth')){
+            return (<Card>
+                <Form onSubmit={e => {e.preventDefault()}}>
+                    {/* <Rating onChange={(rate) => this.handleChange(rate)} /> */}
+                    
+                    <Box component="fieldset" mb={3} borderColor="transparent">
+                        {/* <Typography component="legend">Rating</Typography> */}
+                        <Rating
+                            value={this.state.rate}
+                            onChange={(event, newValue) => this.handleChange(event,newValue)}
+                        />
+                    
+                        <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
+                        <Button type="submit" variant="primary" onClick={this.onSubmit} >Submit</Button>
+                    </Box>
+                </Form>
+            </Card>)
+        }else{
+            return (<a href='/login'><h2>Please login to write a review</h2></a>)
+        }
+    }
+
     render(){  
         const comment = this.state.comment.map(comm => (
             <Card.Body key={comm.id}>
@@ -96,23 +119,8 @@ class Review extends Component{
         return (
             <>
             <ReactNotification />
-            <Card>
-                <Form onSubmit={e => {e.preventDefault()}}>
-                    {/* <Rating onChange={(rate) => this.handleChange(rate)} /> */}
-                    
-                    <Box component="fieldset" mb={3} borderColor="transparent">
-                        {/* <Typography component="legend">Rating</Typography> */}
-                        <Rating
-                            value={this.state.rate}
-                            onChange={(event, newValue) => this.handleChange(event,newValue)}
-                        />
-                    
-                        <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
-                        <Button type="submit" variant="primary" onClick={this.onSubmit} >Submit</Button>
-                    </Box>
-                </Form>
-            </Card>
             
+            {this.checkLoginReview()}
             {/* Show commends */}
             <Box><Card>{comment}</Card></Box>
             </>
