@@ -20,6 +20,14 @@ module.exports = {
       credit:3,
       createdAt: new Date(),
       updatedAt: new Date()
+    },{
+      course_no: 261434,
+      name: 'Network Design and Mangement',
+      section: 11,
+      teacher:'Aj.Yuthapong',
+      description:'coures description...',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   ], {});
   },
