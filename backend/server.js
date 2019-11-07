@@ -13,6 +13,7 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(cors())
 
+
 // console log all req
 const logRequestStart = (req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`)
