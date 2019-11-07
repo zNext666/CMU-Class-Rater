@@ -12,6 +12,13 @@ class App extends Component {
         chart: {
           id: "basic-bar"
         },
+
+        plotOptions: {
+          bar: {
+              horizontal: true,
+          }
+      },
+      
         xaxis: {
           categories: [1,2,3,4,5]
         }
@@ -43,6 +50,7 @@ class App extends Component {
         if(tempObj.rate == 5){
           tempcount[5] = tempObj.count
         }
+        
     }
     tempcount.shift()
     tempObj = [{

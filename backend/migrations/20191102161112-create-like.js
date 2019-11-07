@@ -1,32 +1,29 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Reviews', {
+    return queryInterface.createTable('Likes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      rate: {
-        type: Sequelize.DOUBLE
-      },
-      comment: {
-        type: Sequelize.TEXT
-      },
-      course_no: {
-        type: Sequelize.INTEGER,
-        references: {         // User belongsTo Company 1:1
-          model: 'Courses',
-          key: 'course_no'
-        }
-      },
       user_id: {
         type: Sequelize.INTEGER,
-        references: {         // User belongsTo Company 1:1
+        references: {         // User belongsTo Users 
           model: 'Users',
           key: 'id'
         }
+      },
+      review_id: {
+        type: Sequelize.INTEGER,
+        references: {         // User belongsTo Reviews 
+          model: 'Reviews',
+          key: 'id'
+        }
+      },
+      op: {
+        type: Sequelize.ENUM('0', '1','2')
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +36,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Reviews');
+    return queryInterface.dropTable('Likes');
   }
 };
