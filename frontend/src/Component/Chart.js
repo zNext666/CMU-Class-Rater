@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import { ThemeProvider } from "react-bootstrap";
-import { array } from "prop-types";
 
 class App extends Component {
   constructor(props) {
