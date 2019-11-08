@@ -36,7 +36,6 @@ const registerValidationRules = () => {
     })
   ]
 }
-
 // error message handling
 const validate = (req, res, next) => {
   const errors = validationResult(req)

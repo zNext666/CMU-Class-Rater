@@ -18,4 +18,30 @@ router.post('/register',registerValidationRules(),validate,(req,res) => {
     })
 })
 
+router.post('/login',(req,res) => {
+    User.findOne({
+        attributes : ['username','email','role','password'],
+        where: {
+          username:req.body.username
+        },order: db.sequelize.literal('createdAt DESC')
+    }).then(data => {
+        if(!data){
+            res.json({
+                "error":"User not found!"
+            }).status(422)
+        }
+        if(bcrypt.compareSync(req.body.password,data.password)){
+            res.json({
+                username:data.username,
+                email:data.email,
+                role:data.role
+            })
+        }else{
+            res.json({
+                "error":"Password not match!"
+            }).status(422)
+        }
+    })
+})
+
 module.exports = router
