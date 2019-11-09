@@ -77,12 +77,6 @@ class Header extends Component{
             return '/login'
         }
     }
-    countryToFlag = (isoCode) => {
-        return typeof String.fromCodePoint !== 'undefined'
-          ? isoCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397))
-          : isoCode;
-      }
-
     render(){
         const style={
             position:'absolute',
