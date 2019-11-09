@@ -11,6 +11,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import { Switch } from '@material-ui/core';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
+import {connect} from 'react-redux'
 
 class Header extends Component{
 
@@ -95,7 +96,8 @@ class Header extends Component{
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
-        return(
+        console.log(this.props.auth)
+        return(  
             <header>
                 <Navbar bg="light" expand="lg">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -134,5 +136,10 @@ class Header extends Component{
         )
     }
 }
+const mapState = (state) =>{
+    return{
+        auth:state.auth.auth
+    }
+}
   
-  export default Header
+  export default connect(mapState)(Header)
