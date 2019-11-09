@@ -5,9 +5,14 @@ import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
+import { Autocomplete } from '@material-ui/lab';
+import { TextField } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import {Autocomplete} from '@material-ui/lab';
 import {TextField} from '@material-ui/core';
+import { Switch } from '@material-ui/core';
+import SearchSharpIcon from '@material-ui/icons/SearchSharp';
+import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 
 class Header extends Component{
 
@@ -15,11 +20,12 @@ class Header extends Component{
         super()
         this.state = {
             query:'',
-            data:[]
+            data:[],
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleClickSearch = this.handleClickSearch.bind(this)
     }
+
 
     handleClickSearch = () =>{
         window.location = '/search/'+this.state.query   
@@ -51,12 +57,12 @@ class Header extends Component{
 
     filterUrl = (param) => {
         if(window.location.href.search('review') < 1){
-            return "review/"+ param
+            return "../review/"+ param
         }else{
             return param
         }
     }
-
+   
     checkLogin = () =>{
         if(sessionStorage.getItem('auth')){
             return sessionStorage.getItem('auth')
@@ -93,7 +99,7 @@ class Header extends Component{
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/"><HomeSharpIcon/></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
@@ -101,7 +107,7 @@ class Header extends Component{
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
                     <Dropdown>{search}</Dropdown>
-                    <Button variant="outline-success" onClick={this.handleClickSearch}>Search</Button>
+                    <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
                 </Form>
                 </Nav>
                 </Col>

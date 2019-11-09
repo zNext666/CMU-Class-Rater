@@ -6,21 +6,21 @@ module.exports = {
       username: 'Anonymous',
       email: 'annonymous@gmail.com',
       password: 'abcd',
-      role: 'admin',  
+      role: '{"role":["admin"]}',  
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       username: 'decade65',
       email: 'tunesudro@hotmail.com',
       password: 'decade66',
-      role: 'admin',   
+      role: '{"role":["admin"]}',   
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       username: 'test',
       email: 'test@gmail.com',
       password: '1234',
-      role: 'admin',   
+      role: '{"role":["admin"]}',   
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
