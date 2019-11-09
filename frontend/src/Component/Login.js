@@ -21,6 +21,10 @@ class LoginComponent extends Component{
     render(){
         return(
             <Container>
+                <Row>
+                <Col>
+                </Col>
+                <Col>
                 <Card style={{ width: '28rem' }} className="text-center">
                 <Card.Header as="h5">Login</Card.Header>
                 <Card.Body>
@@ -53,8 +57,17 @@ class LoginComponent extends Component{
                     </Form>
                     <Button variant="primary">Login</Button>
                 </Card.Body>
-                <Card.Footer className="text-muted"><a href="#">Forgot Password?</a></Card.Footer>
+                <Card.Footer className="text-muted">
+                <Row>
+                <Col md={4}>{<a href="/register">Register</a>}</Col>
+                <Col md={{ span: 5, offset: 3 }}>{<a href="#">Forgot Password?</a>}</Col>
+                </Row>
+                </Card.Footer>
                 </Card>
+                </Col>
+                <Col>
+                </Col>
+                </Row>
             </Container>
         )
     }
