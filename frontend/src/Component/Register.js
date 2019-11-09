@@ -6,6 +6,10 @@ class Register extends Component{
     render(){
         return(
             <Container>
+                <Row>
+                <Col>
+                </Col>
+                <Col>
                 <Card style={{ width: '28rem' }} className="text-center">
                 <Card.Header as="h5">Register</Card.Header>
                 <Card.Body>
@@ -32,6 +36,10 @@ class Register extends Component{
                 </Card.Body>
                 <Card.Footer className="text-muted"><a href="/login">Already Have a account?</a></Card.Footer>
                 </Card>
+                </Col>
+                <Col>
+                </Col>
+                </Row>
             </Container>
         )
     }

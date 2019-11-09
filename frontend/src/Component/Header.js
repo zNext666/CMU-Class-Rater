@@ -8,8 +8,6 @@ import {NavDropdown }  from 'react-bootstrap';
 import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import {Autocomplete} from '@material-ui/lab';
-import {TextField} from '@material-ui/core';
 import { Switch } from '@material-ui/core';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
@@ -78,12 +76,18 @@ class Header extends Component{
             return '/login'
         }
     }
+    countryToFlag = (isoCode) => {
+        return typeof String.fromCodePoint !== 'undefined'
+          ? isoCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397))
+          : isoCode;
+      }
 
     render(){
         const style={
             position:'absolute',
             right:'50px'
         }
+
         /*const auth = 'Anonymous'
         if(sessionStorage.getItem('auth')){
             auth = sessionStorage.getItem('auth')
