@@ -43,7 +43,6 @@ export default function Page(){
 function Home(){
     return(
         <> 
-        
             <Main />
             <Footer />
         </>

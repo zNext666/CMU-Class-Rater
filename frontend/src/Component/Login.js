@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
 import {Container,Row,Col,Card,Form,Button}  from 'react-bootstrap'
-
-class Login extends Component{
+import FacebookProvider, {LoginButton } from 'react-facebook-sdk'
+import FacebookLogin from 'react-facebook-login';
+class LoginComponent extends Component{
     constructor(){
         super()
         this.state = {
-            uid:[]
+            uid:[],
+            error:[]
         }
+    }
+    handleResponse = (data) => {
+        console.log(data)
+    }
+     
+      handleError = (error) => {
+        this.setState({ error })
     }
 
     render(){
@@ -15,6 +24,23 @@ class Login extends Component{
                 <Card style={{ width: '28rem' }} className="text-center">
                 <Card.Header as="h5">Login</Card.Header>
                 <Card.Body>
+{/*                 <FacebookProvider appId="511320256372565">
+                    <LoginButton
+                        scope="email"
+                        onCompleted={this.handleResponse}
+                        onError={this.handleError}
+                        >
+                            <span>Login via Facebook</span>
+                    </LoginButton>
+                </FacebookProvider> */}
+                <FacebookLogin
+                    appId="511320256372565"
+                    fields="name,email,picture"
+                    callback={this.handleResponse}
+                    autoLoad={true}
+                    cssClass="my-facebook-button-class"
+                    icon="fa-facebook"
+                />
                     <Form>
                         <Form.Group controlId="formGroupUsername">
                             <Form.Label>Username</Form.Label>
@@ -34,4 +60,4 @@ class Login extends Component{
     }
 }
 
-export default Login
+export default LoginComponent

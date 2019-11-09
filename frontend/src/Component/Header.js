@@ -5,8 +5,13 @@ import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
+import { Autocomplete } from '@material-ui/lab';
+import { TextField } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import { Switch } from '@material-ui/core';
+import SearchSharpIcon from '@material-ui/icons/SearchSharp';
+import HomeSharpIcon from '@material-ui/icons/HomeSharp';
+import {connect} from 'react-redux'
 
 class Header extends Component{
 
@@ -14,11 +19,12 @@ class Header extends Component{
         super()
         this.state = {
             query:'',
-            data:[]
+            data:[],
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleClickSearch = this.handleClickSearch.bind(this)
     }
+
 
     handleClickSearch = () =>{
         window.location = '/search/'+this.state.query   
@@ -55,7 +61,7 @@ class Header extends Component{
             return param
         }
     }
-
+   
     checkLogin = () =>{
         if(sessionStorage.getItem('auth')){
             return sessionStorage.getItem('auth')
@@ -84,7 +90,8 @@ class Header extends Component{
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
-        return(
+        console.log(this.props.auth)
+        return(  
             <header>
                 <Navbar bg="light" expand="lg">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -92,7 +99,7 @@ class Header extends Component{
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/"><HomeSharpIcon/></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
@@ -100,7 +107,7 @@ class Header extends Component{
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
                     <Dropdown>{search}</Dropdown>
-                    <Button variant="outline-success" onClick={this.handleClickSearch}>Search</Button>
+                    <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
                 </Form>
                 </Nav>
                 </Col>
@@ -123,5 +130,10 @@ class Header extends Component{
         )
     }
 }
+const mapState = (state) =>{
+    return{
+        auth:state.auth.auth
+    }
+}
   
-  export default Header
+  export default connect(mapState)(Header)

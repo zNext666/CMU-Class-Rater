@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import axios from 'axios'
 import Chart from './Chart'
+import Rating from '@material-ui/lab/Rating';
 
 class Course extends Component{
     constructor() {
@@ -11,21 +12,6 @@ class Course extends Component{
             item:[],
             avg:[],
             sum:[],
-            
-            options: {
-                chart: {
-                  id: "basic-bar"
-                },
-                xaxis: {
-                  categories: [5, 4, 3, 2, 1]
-                }
-            },
-            series: [
-                {
-                  name: "series-1",
-                  data: [50, 40, 45, 50, 49]
-                }
-            ]
         }
     }
 
@@ -81,8 +67,6 @@ class Course extends Component{
     render(){
         const sum = this.state.sum.map((item) => (
             <>
-                <p>Rate: {item.rate}</p>
-                <p>Count: {item.count}</p>
             </>
         ))
         return (
@@ -96,7 +80,11 @@ class Course extends Component{
                     </Card.Text>
                     <Card.Text>
                     Course: {this.state.avg.course_no} Average: {parseFloat(this.state.avg.average).toFixed(2)}
-                    {sum}
+                    {/*{sum}*/}
+                    <b>Score</b>  <p>{parseFloat(this.state.avg.average).toFixed(2)}{sum}</p>
+                    </Card.Text>
+                    <Card.Text>
+                    <Rating name="half-rating" value={this.state.avg.average} precision={0.1} readOnly />
                     </Card.Text>
 
                     <div className="app">
