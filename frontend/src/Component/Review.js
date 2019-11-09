@@ -12,6 +12,8 @@ import 'react-notifications-component/dist/theme.css'
 import ReactNotification,{ store } from 'react-notifications-component'
 import {Navbar} from 'react-bootstrap'
 import 'typeface-roboto';
+import {connect} from 'react-redux'
+
 class Review extends Component{
     
     constructor(){
@@ -77,7 +79,7 @@ class Review extends Component{
     }
 
     checkLoginReview = () =>{
-        if(sessionStorage.getItem('auth')){
+        if(this.props.auth){
             return (<Card>
                 <Form onSubmit={e => {e.preventDefault()}}>
                     {/* <Rating onChange={(rate) => this.handleChange(rate)} /> */}
@@ -128,4 +130,10 @@ class Review extends Component{
     }
 }
 
-export default Review
+const mapState = (state) =>{
+    return{
+        auth:state.auth.auth
+    }
+}
+  
+  export default connect(mapState)(Review)
