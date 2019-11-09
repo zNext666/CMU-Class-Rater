@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import {Container,Row,Col,Card,Form,Button}  from 'react-bootstrap'
 import FacebookProvider, {LoginButton } from 'react-facebook-sdk'
 import FacebookLogin from 'react-facebook-login';
+import axios from 'axios'
+
+
 class LoginComponent extends Component{
     constructor(){
         super()
@@ -16,6 +19,11 @@ class LoginComponent extends Component{
      
       handleError = (error) => {
         this.setState({ error })
+    }
+
+    submitHandler = (e) =>{
+        //const response = axios.post('http://localhost:8000/api/users/login')
+
     }
 
     render(){
@@ -45,7 +53,7 @@ class LoginComponent extends Component{
                     cssClass="my-facebook-button-class"
                     icon="fa-facebook"
                 />
-                    <Form>
+                    <Form onSubmit={this.submitHandler}>
                         <Form.Group controlId="formGroupUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Enter Username" />
