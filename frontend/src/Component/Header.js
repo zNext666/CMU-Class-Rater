@@ -77,12 +77,12 @@ class Header extends Component{
             return '/login'
         }
     }
-
     render(){
         const style={
             position:'absolute',
             right:'50px'
         }
+
         /*const auth = 'Anonymous'
         if(sessionStorage.getItem('auth')){
             auth = sessionStorage.getItem('auth')
