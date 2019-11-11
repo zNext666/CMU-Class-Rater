@@ -83,14 +83,14 @@ class Header extends Component{
             right:'50px'
         }
 
-        /*const auth = 'Anonymous'
+        //const auth = 'Anonymous'
         if(sessionStorage.getItem('auth')){
-            auth = sessionStorage.getItem('auth')
-        }*/
+            //auth = sessionStorage.getItem('auth')
+        }
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
-        console.log(this.props.auth)
+        //console.log(this.props.auth)
         return(  
             <header>
                 <Navbar bg="light" expand="lg">
@@ -130,10 +130,11 @@ class Header extends Component{
         )
     }
 }
-const mapState = (state) =>{
+/*const mapState = (state) =>{
     return{
         auth:state.auth.auth
     }
-}
+}*/
   
-  export default connect(mapState)(Header)
+  //export default connect(mapState)(Header)
+  export default Header

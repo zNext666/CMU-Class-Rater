@@ -3,14 +3,16 @@ import {Container,Row,Col,Card,Form,Button}  from 'react-bootstrap'
 import FacebookProvider, {LoginButton } from 'react-facebook-sdk'
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {Login} from '../store/actions/authAction'
 
 
 class LoginComponent extends Component{
     constructor(){
         super()
         this.state = {
-            uid:[],
-            error:[]
+            username:'',
+            password:''
         }
     }
     handleResponse = (data) => {
@@ -22,8 +24,22 @@ class LoginComponent extends Component{
     }
 
     submitHandler = (e) =>{
+        e.preventDefault()
         //const response = axios.post('http://localhost:8000/api/users/login')
+        this.props.Login(this.state)
+        console.log(this.state)
+    }
 
+    username = (event) =>{
+        this.setState({
+            username:event.target.value
+        })
+    }
+
+    password = (event) =>{
+        this.setState({
+            password:event.target.value
+        })
     }
 
     render(){
@@ -56,14 +72,14 @@ class LoginComponent extends Component{
                     <Form onSubmit={this.submitHandler}>
                         <Form.Group controlId="formGroupUsername">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Username" />
+                            <Form.Control type="text" placeholder="Enter Username" onChange={this.username} />
                         </Form.Group>
                         <Form.Group controlId="formGroupPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" />
+                            <Form.Control type="password" placeholder="Enter Password" onChange={this.password} />
                         </Form.Group>
-                    </Form>
-                    <Button variant="primary">Login</Button>
+                        <Button variant="primary" type="submit">Login</Button>
+                    </Form>      
                 </Card.Body>
                 <Card.Footer className="text-muted">
                 <Row>
@@ -80,5 +96,10 @@ class LoginComponent extends Component{
         )
     }
 }
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        Login: (auth) => dispatch(Login(auth))
+    }
+}
 
-export default LoginComponent
+export default connect(null, mapDispatchToProps)(LoginComponent)
