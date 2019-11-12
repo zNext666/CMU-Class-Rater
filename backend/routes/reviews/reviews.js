@@ -2,11 +2,12 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../models/index')
 const Review = db.Review
+const User = db.User
 const Op = db.Sequelize.Op
 
 router.get('/:course_no',(req,res) => {
     Review.findAll({
-      attributes : ['id','user','rate','comment','course_no','createdAt'],
+      attributes : ['id','user_id','rate','comment','course_no','createdAt'],
       where: {
         course_no:req.params.course_no
       },order: db.sequelize.literal('createdAt DESC')

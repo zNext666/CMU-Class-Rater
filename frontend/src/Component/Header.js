@@ -63,10 +63,13 @@ class Header extends Component{
     }
    
     checkLogin = () =>{
+        if(this.props.auth.username){
+            return this.props.auth.username
+        }else
         if(sessionStorage.getItem('auth')){
             return sessionStorage.getItem('auth')
         }else{
-            return 'Please login'
+            return 'Login'
         }
     }
 
@@ -77,6 +80,16 @@ class Header extends Component{
             return '/login'
         }
     }
+
+    Logout = () =>{
+        sessionStorage.clear()
+        if(window.location.href.search('login') < 1){
+            window.location.href = '/'
+        }else{
+            window.location.href = window.location.href 
+        }
+    }
+
     render(){
         const style={
             position:'absolute',
@@ -115,11 +128,10 @@ class Header extends Component{
                 <Nav className="justify-content-end">
                 <NavDropdown title={this.checkLogin()} id="collasible-nav-dropdown">
                     <NavDropdown.Item href={this.navigateProfile()}>{this.checkLogin()}</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                    <NavDropdown.Divider />               
                     <NavDropdown.Item href="/register">Register</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">logout</NavDropdown.Item>
+                    <NavDropdown.Item onClick={this.Logout} >logout</NavDropdown.Item>
                 </NavDropdown>
                 </Nav>
                 </Col>
@@ -130,11 +142,10 @@ class Header extends Component{
         )
     }
 }
-/*const mapState = (state) =>{
-    return{
-        auth:state.auth.auth
-    }
-}*/
+const mapStateToProps = state =>({
+    auth: state.auth.user,
+    loggingIn: state.auth.loggingIn
+})
   
   //export default connect(mapState)(Header)
-  export default Header
+  export default connect(mapStateToProps)(Header)

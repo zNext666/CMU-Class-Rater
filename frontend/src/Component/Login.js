@@ -5,7 +5,8 @@ import FacebookLogin from 'react-facebook-login';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Login} from '../store/actions/authAction'
-
+import ReactNotification,{ store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 class LoginComponent extends Component{
     constructor(){
@@ -24,10 +25,9 @@ class LoginComponent extends Component{
     }
 
     submitHandler = (e) =>{
-        e.preventDefault()
+        e.preventDefault() 
         //const response = axios.post('http://localhost:8000/api/users/login')
-        this.props.Login(this.state)
-        console.log(this.state)
+        this.props.Login(this.state)  
     }
 
     username = (event) =>{
@@ -45,6 +45,7 @@ class LoginComponent extends Component{
     render(){
         return(
             <Container>
+                <ReactNotification />
                 <Row>
                 <Col>
                 </Col>
@@ -69,7 +70,7 @@ class LoginComponent extends Component{
                     cssClass="my-facebook-button-class"
                     icon="fa-facebook"
                 />
-                    <Form onSubmit={this.submitHandler}>
+                    <Form onSubmit={this.submitHandler} >
                         <Form.Group controlId="formGroupUsername">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Enter Username" onChange={this.username} />
@@ -96,10 +97,15 @@ class LoginComponent extends Component{
         )
     }
 }
+const mapStateToProps = state =>({
+        auth: state.auth.user,
+        loggingIn: state.auth.loggingIn
+})
+
 const mapDispatchToProps = (dispatch) =>{
     return{
-        Login: (auth) => dispatch(Login(auth))
+        Login: (a) => dispatch(Login(a))
     }
 }
 
-export default connect(null, mapDispatchToProps)(LoginComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent)
