@@ -29,15 +29,16 @@ class Review extends Component{
     }
 
     async onSubmit(e){
-        const auth = sessionStorage.getItem('auth')
+        const auth = sessionStorage.getItem('uid')
 
         const ncomment = await {
-            user: auth,
+            user_id: Number(auth),
             rate: this.state.rate,
             course_no: this.state.course_no,
             comment: this.state.review
         }
-        await axios.post('http://localhost:8000/api/review/course', ncomment)
+        const res = await axios.post('http://localhost:8000/api/review/course', ncomment)
+        const data = await res.data
         store.addNotification({
             title: "Success!",
             message: auth + ' comment success!',
@@ -51,7 +52,9 @@ class Review extends Component{
               onScreen: true
             }
           });
+          this.setState({review:'',rate:0})
           this.getComment()
+          console.log(data)
     }
 
     handleChange(e,newValue){
@@ -71,6 +74,10 @@ class Review extends Component{
         }
     }
 
+    handleReviewChange = (e) =>{
+        this.setState({review:e.target.value})
+    }
+
     async componentDidMount(){
         this.getComment()
     }
@@ -88,7 +95,7 @@ class Review extends Component{
                             onChange={(event, newValue) => this.handleChange(event,newValue)}
                         />
                     
-                        <Form.Control onChange={event => this.state.review = event.target.value} as="textarea" rows="3" placeholder="Write a review..."/>
+                        <Form.Control value={this.state.review} onChange={this.handleReviewChange} as="textarea" rows="3" placeholder="Write a review..."/>
                         <Button type="submit" variant="primary" onClick={this.onSubmit} >Submit</Button>
                     </Box>
                 </Form>
@@ -118,7 +125,6 @@ class Review extends Component{
         return (
             <>
             <ReactNotification />
-            
             {this.checkLoginReview()}
             {/* Show commends */}
             <Box><Card>{comment}</Card></Box>
@@ -126,5 +132,9 @@ class Review extends Component{
         )
     }
 }
-  
-  export default Review
+const mapStateToProps = state =>({
+    auth: state.auth.user,
+    loggingIn: state.auth.loggingIn
+})  
+
+  export default connect(mapStateToProps)(Review)

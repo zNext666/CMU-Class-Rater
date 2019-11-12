@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     rate: DataTypes.DOUBLE,
     comment: DataTypes.TEXT,
+    user_id: DataTypes.INTEGER,
     course_no: DataTypes.INTEGER
   }, {});
   Review.associate = function(models) {
