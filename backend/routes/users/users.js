@@ -20,7 +20,7 @@ router.post('/register',registerValidationRules(),validate,(req,res) => {
 
 router.post('/login',(req,res) => {
     User.findOne({
-        attributes : ['username','email','role','password'],
+        attributes : ['id', 'username','email','role','password'],
         where: {
           username:req.body.username
         },order: db.sequelize.literal('createdAt DESC')
@@ -32,6 +32,7 @@ router.post('/login',(req,res) => {
         }
         if(bcrypt.compareSync(req.body.password,data.password)){
             res.json({
+                id:data.id,
                 username:data.username,
                 email:data.email,
                 role:data.role

@@ -29,10 +29,7 @@ class Review extends Component{
     }
 
     async onSubmit(e){
-        const auth = 'Anonymous'
-        if(sessionStorage.getItem('auth')){
-            auth = sessionStorage.getItem('auth')
-        }
+        const auth = sessionStorage.getItem('auth')
 
         const ncomment = await {
             user: auth,
@@ -79,7 +76,7 @@ class Review extends Component{
     }
 
     checkLoginReview = () =>{
-        if(this.props.auth){
+        if(sessionStorage.getItem('auth')){
             return (<Card>
                 <Form onSubmit={e => {e.preventDefault()}}>
                     {/* <Rating onChange={(rate) => this.handleChange(rate)} /> */}
@@ -101,11 +98,11 @@ class Review extends Component{
         }
     }
 
-    render(){  
+    render(){     
         const comment = this.state.comment.map(comm => (
             <Card.Body key={comm.id}>
                 <Box>
-                    <h5>{comm.user}</h5>
+                    <h5>{comm.user_id}</h5>
                     <Navbar>
                         <Rating value={comm.rate} readOnly />
                         <ListItemSecondaryAction>
@@ -129,11 +126,5 @@ class Review extends Component{
         )
     }
 }
-
-const mapState = (state) =>{
-    return{
-        auth:state.auth.auth
-    }
-}
   
-  export default connect(mapState)(Review)
+  export default Review
