@@ -17,3 +17,11 @@ export const Login = (a) =>{
         }
     }
 }
+
+export const LoginFacebook = (a) =>{
+    return async(dispatch, getState) => {
+            dispatch({
+                type: 'LOGIN_FACEBOOK', payload: a
+            })
+    }
+}

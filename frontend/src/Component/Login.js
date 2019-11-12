@@ -4,7 +4,7 @@ import FacebookProvider, {LoginButton } from 'react-facebook-sdk'
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {Login} from '../store/actions/authAction'
+import {Login,LoginFacebook} from '../store/actions/authAction'
 import ReactNotification,{ store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
@@ -17,6 +17,7 @@ class LoginComponent extends Component{
         }
     }
     handleResponse = (data) => {
+        this.props.LoginFacebook(data) 
         console.log(data)
     }
      
@@ -66,7 +67,7 @@ class LoginComponent extends Component{
                     appId="511320256372565"
                     fields="name,email,picture"
                     callback={this.handleResponse}
-                    autoLoad={true}
+                    autoLoad={false}
                     cssClass="my-facebook-button-class"
                     icon="fa-facebook"
                 />
@@ -104,7 +105,8 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        Login: (a) => dispatch(Login(a))
+        Login: (a) => dispatch(Login(a)),
+        LoginFacebook: (a) => dispatch(LoginFacebook(a))
     }
 }
 

@@ -16,6 +16,14 @@ const authReducer = (state = initState, action) => {
         case 'LOGIN_ERROR':
             console.log('login error', action.data)
             return state
+        case 'LOGIN_FACEBOOK':
+                console.log('login facebook', action.payload)
+                sessionStorage.setItem('auth', action.payload.name);
+                sessionStorage.setItem('uid', action.payload.id);
+            return {
+                user: action.payload,
+                loggingIn: true
+            }
         default:
             return state
     }
