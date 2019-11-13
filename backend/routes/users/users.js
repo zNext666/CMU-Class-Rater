@@ -26,9 +26,9 @@ router.post('/login',(req,res) => {
         },order: db.sequelize.literal('createdAt DESC')
     }).then(data => {
         if(!data){
-            res.json({
+            res.status(422).json({
                 "error":"User not found!"
-            }).status(422)
+            })
         }
         if(bcrypt.compareSync(req.body.password,data.password)){
             res.json({
@@ -38,9 +38,9 @@ router.post('/login',(req,res) => {
                 role:data.role
             })
         }else{
-            res.json({
+            res.status(422).json({
                 "error":"Password not match!"
-            }).status(422)
+            })
         }
     })
 })

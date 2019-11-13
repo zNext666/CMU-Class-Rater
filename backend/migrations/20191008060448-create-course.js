@@ -20,7 +20,8 @@ module.exports = {
         type: Sequelize.TEXT
       },
       view: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       credit: {
         type: Sequelize.INTEGER

@@ -39,7 +39,10 @@ class Course extends Component{
 
     getSum = async() =>{
         try {
+            const increaseView = await axios.post('http://localhost:8000/api/course/' + this.state.course_no + '/view', {course_no:this.state.course_no})
             const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary')
+            const view = increaseView.data
+            console.log('view: '+view)
             const data = await response.data
             this.setState({sum:data})
             console.log(this.state.sum)
@@ -75,6 +78,7 @@ class Course extends Component{
                     <Card.Title>{this.state.item.course_no} {this.state.item.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Section: {this.state.item.section}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{this.state.item.teacher}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">view: {this.state.item.view}</Card.Subtitle>
                     <Card.Text>
                         {this.state.item.description}
                     </Card.Text>
