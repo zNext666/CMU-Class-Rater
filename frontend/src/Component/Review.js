@@ -41,10 +41,10 @@ class Review extends Component{
         const data = await res.data
         store.addNotification({
             title: "Success!",
-            message: auth + ' comment success!',
+            message: sessionStorage.getItem('auth') + ' comment success!',
             type: "success",
             insert: "top",
-            container: "top-left",
+            container: "top-right",
             animationIn: ["animated", "fadeIn"],
             animationOut: ["animated", "fadeOut"],
             dismiss: {
