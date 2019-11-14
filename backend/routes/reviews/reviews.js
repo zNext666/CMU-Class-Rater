@@ -7,11 +7,15 @@ const Op = db.Sequelize.Op
 
 router.get('/:course_no',(req,res) => {
     Review.findAll({
-      attributes : ['id','user_id','rate','comment','course_no','createdAt'],
+      include: [
+        { model: User,
+          attributes:['username']
+        }
+     ],
+      attributes : ['id','rate','comment','course_no','createdAt'],
       where: {
         course_no:req.params.course_no
-      },order: db.sequelize.literal('createdAt DESC')
-  
+      },order: db.sequelize.literal('createdAt DESC'),
     }).then((data) => {
       res.json(data)
     })
@@ -33,8 +37,8 @@ router.get('/:course_no/summary',(req,res)=>{
       group: ['rate'],
       attributes: ['rate',[db.sequelize.fn('COUNT', 'rate'), 'count']],
       where:{
-      course_no:req.params.course_no
-    }
+        course_no:req.params.course_no
+      }
     }).then((data)=>{
       res.json(data)
     })
