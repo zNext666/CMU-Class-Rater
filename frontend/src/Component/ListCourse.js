@@ -7,14 +7,28 @@ class ListCourse extends Component{
     constructor() {
         super()
         this.state = {
-            courses:[]
+            courses:[],
+            avg:[],
         }
+    }
+    getAvg = async(para) =>{
+            const response = await axios.get('http://localhost:8000/api/reviews/' + para + '/summary/average')
+            const data = await response.data
+            //const get = this.state.avg.concat(data)
+            //this.setState({state:get})
+            //this.setState({avg:data})
+            console.log(data)
+            console.log('avg: '+data.average)
+            //console.log(this.state.avg)
+            return data.average
     }
 
     async componentDidMount(){
         const response = await axios.get('http://localhost:8000/api/courses')
         const data = await response.data
         this.setState({courses:data})
+        
+        console.log(this.state.courses)
     }
 
     render(){
@@ -25,6 +39,7 @@ class ListCourse extends Component{
                     <Card.Title>{item.course_no} {item.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Section: {item.section}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{item.teacher}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">Average: {}</Card.Subtitle>
                 </a>
             </Card.Body>
             </Card>

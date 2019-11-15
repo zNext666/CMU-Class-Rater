@@ -8,10 +8,10 @@ import {NavDropdown }  from 'react-bootstrap';
 import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import { Switch } from '@material-ui/core';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import {connect} from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles';
 
 class Header extends Component{
 
@@ -31,7 +31,8 @@ class Header extends Component{
         console.log(this.state.query)
     }
 
-    getData = async () => {       
+    getData = async () => {     
+        //if(this.state.query!='') {
         try {
             const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
             const data = await response.data
@@ -41,6 +42,12 @@ class Header extends Component{
         } catch (error){
             console.log(error)
         }
+    //}
+    }
+
+
+    componentDidMount(){
+        this.getData()
     }
 
     handleChange = event => {
@@ -90,6 +97,11 @@ class Header extends Component{
         }
     }
 
+    setQuery = (param) =>{
+        console.log(param)
+        //this.setState({query:param})
+    }
+
     render(){
         const style={
             position:'absolute',
@@ -103,6 +115,50 @@ class Header extends Component{
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
+
+        const useStyles = makeStyles({
+            option: {
+              fontSize: 15,
+              '& > span': {
+                marginRight: 10,
+                fontSize: 18,
+              },
+            },
+          });
+          const classes = useStyles;
+          const course = 
+            <Autocomplete
+            //onChange = {this.state.query}
+                id="country-select-demo"
+                style={{ width: 300 }}
+                options={this.state.data}
+                classes={{
+                    option: classes.option,
+                }}
+                autoHighlight
+                getOptionLabel={option => option.name}
+                renderOption={option => (
+                    <React.Fragment>                       
+                     {option.course_no} {option.name}
+                    </React.Fragment>
+                )}
+                renderInput={params => {
+                    onchange =this.setQuery({query:params.inputProps.value})
+                    return (
+                <TextField
+                    {...params}
+                    label="Choose a course"
+                    variant="outlined"
+                    fullWidth
+                    inputProps={{
+                        ...params.inputProps,
+                        autoComplete: 'disabled', // disable autocomplete and autofill
+                    }}
+                    />
+                    )}}
+                />
+  
+
         //console.log(this.props.auth)
         return(  
             <header>
@@ -117,11 +173,8 @@ class Header extends Component{
                 </Col>
                 <Col>
                 <Nav className="justify-content-center">
-                <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
-                    <Dropdown>{search}</Dropdown>
-                    <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
-                </Form>
+                {course}
+                <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
                 </Nav>
                 </Col>
                 <Col>

@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'
 import axios from 'axios'
 import Chart from './Chart'
 import Rating from '@material-ui/lab/Rating';
+import {Row ,Col}  from 'react-bootstrap';
 
 class Course extends Component{
     constructor() {
@@ -83,12 +84,15 @@ class Course extends Component{
                         {this.state.item.description}
                     </Card.Text>
                     <Card.Text>
-                    Course: {this.state.avg.course_no} Average: {parseFloat(this.state.avg.average).toFixed(2)}
-                    {/*{sum}*/}
-                    <b>Score</b>  <p>{parseFloat(this.state.avg.average).toFixed(2)}{sum}</p>
-                    </Card.Text>
-                    <Card.Text>
-                    <Rating name="half-rating" value={this.state.avg.average} precision={0.1} readOnly />
+                    <Col>
+                    <Row>
+                        Average: {parseFloat(this.state.avg.average).toFixed(2)}
+                    </Row>
+                    <Row>
+                        <Rating name="half-rating" value={this.state.avg.average} precision={0.1} readOnly />
+                    </Row>
+                    </Col>
+                    
                     </Card.Text>
 
                     <div className="app">
