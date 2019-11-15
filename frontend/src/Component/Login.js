@@ -43,10 +43,50 @@ class LoginComponent extends Component{
         })
     }
 
+    componentWillReceiveProps (nextprops) {
+        if(nextprops.notify != this.props.notify){
+            const notify = nextprops.notify;
+            if (notify == 200) {
+                store.addNotification({
+                    title: "Login success!",
+                    message: 'Click here to proceed...',
+                    type: "success",
+                    click: true,
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    onRemoval: (id, removedBy) => {
+                        window.location.href = '/'
+                      },
+                    dismiss: {
+                        duration: 2000,
+                        onScreen: true
+                    }
+                });
+            }else{
+                store.addNotification({
+                    title: "Error!",
+                    message: '  Login failed!   ',
+                    type: "danger",
+                    insert: "top",
+                    container: "top-right",
+                    animationIn: ["animated", "fadeIn"],
+                    animationOut: ["animated", "fadeOut"],
+                    click: true,
+                    dismiss: {
+                        duration: 2000,
+                        onScreen: true
+                    }
+            });
+        }
+    }
+}
+
     render(){
         return(
             <Container>
-                <ReactNotification />
+                <ReactNotification  />
                 <Row>
                 <Col>
                 </Col>
@@ -100,7 +140,7 @@ class LoginComponent extends Component{
 }
 const mapStateToProps = state =>({
         auth: state.auth.user,
-        loggingIn: state.auth.loggingIn
+        notify: state.auth.notify
 })
 
 const mapDispatchToProps = (dispatch) =>{
