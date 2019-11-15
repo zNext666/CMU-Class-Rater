@@ -1,15 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "cmuclassrater",
+    "password": "password",
+    "database": "classrate",
     "host": "127.0.0.1",
     "dialect": "mariadb",
     "operatorsAliases": false
   },
   "test": {
     "username": "root",
-    "password": "root",
+    "password": "password",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mariadb",
@@ -17,7 +17,7 @@
   },
   "production": {
     "username": "root",
-    "password": "root",
+    "password": "password",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mariadb",
