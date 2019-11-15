@@ -68,7 +68,7 @@ class Review extends Component{
             const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no)
             const data = await response.data
             this.setState({comment:data})
-            console.log(this.state.course_no)
+            console.log(this.state.comment)
         } catch (error){
             console.log(error)
         }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Container,Row,Col,Card,Form,Button,ButtonToolbar}  from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {createRegister} from '../store/actions/registerAction'
+import ReactNotification,{ store } from 'react-notifications-component'
 
 class Register extends Component{
     state = {
@@ -12,6 +13,7 @@ class Register extends Component{
     }
 
     handleSubmit = (e) =>{
+        e.preventDefault()
         this.props.createRegister(this.state)
     }
 
@@ -30,10 +32,51 @@ class Register extends Component{
     confirmpwd = (e) =>{
         this.setState({confirmpassword:e.target.value})
     }
+    
+    componentWillReceiveProps (nextprops) {
+            if(nextprops.notify != this.props.notify){
+                const notify = nextprops.notify
+
+                if (notify == 200) {
+                    store.addNotification({
+                        title: "Register Success!",
+                        message: 'Register success, Click here to proceed...',
+                        type: "success",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animated", "fadeIn"],
+                        animationOut: ["animated", "fadeOut"],
+                        dismiss: {
+                            duration: 4000,
+                            onScreen: true
+                        },onRemoval: (id, removedBy) => {
+                            window.location.href = '/login'
+                          },
+                        click: true
+                    });
+                }else{
+                    store.addNotification({
+                        title: "Error!",
+                        message: 'Register failed!',
+                        type: "danger",
+                        insert: "top",
+                        container: "top-right",
+                        animationIn: ["animated", "fadeIn"],
+                        animationOut: ["animated", "fadeOut"],
+                        dismiss: {
+                        duration: 4000,
+                        onScreen: true
+                        },
+                        click: true
+                });
+            }
+        }
+    }
 
     render(){
         return(
             <Container>
+                <ReactNotification />
                 <Row>
                 <Col>
                 </Col>
@@ -72,10 +115,16 @@ class Register extends Component{
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        notify: state.register.notify
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createRegister: (register) => dispatch(createRegister(register))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

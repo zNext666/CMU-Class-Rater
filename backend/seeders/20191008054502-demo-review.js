@@ -26,6 +26,7 @@ module.exports = {
       section: 11,
       teacher:'Aj.Yuthapong',
       description:'coures description...',
+      credit: 3,
       createdAt: new Date(),
       updatedAt: new Date()
     }
