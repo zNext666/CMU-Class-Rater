@@ -1,7 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Course = sequelize.define('Course', {
-    course_no: DataTypes.INTEGER,
+    course_no: {
+      type:DataTypes.INTEGER,
+      primaryKey: true
+    },
     name: DataTypes.STRING,
     section: DataTypes.INTEGER,
     teacher: DataTypes.STRING,
@@ -10,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Course.associate = function(models) {
     // associations can be defined here
-    Course.hasMany(models.Review);
+    Course.hasMany(models.Review,{foreignKey: 'course_no'});
   };
   return Course;
 };

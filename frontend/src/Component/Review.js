@@ -68,7 +68,7 @@ class Review extends Component{
             const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no)
             const data = await response.data
             this.setState({comment:data})
-            console.log(this.state.course_no)
+            console.log(data)
         } catch (error){
             console.log(error)
         }
@@ -109,7 +109,7 @@ class Review extends Component{
         const comment = this.state.comment.map(comm => (
             <Card.Body key={comm.id}>
                 <Box>
-                    <h5>{comm.user_id}</h5>
+                    <h5>{comm.User.username}</h5>
                     <Navbar>
                         <Rating value={comm.rate} readOnly />
                         <ListItemSecondaryAction>
