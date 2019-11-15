@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import ReactNotification,{ store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 import axios from 'axios'
 import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
@@ -63,14 +65,23 @@ class Header extends Component{
     }
    
     checkLogin = () =>{
-        if(this.props.auth.username){
-            return this.props.auth.username
-        }else
         if(sessionStorage.getItem('auth')){
             return sessionStorage.getItem('auth')
         }else{
             return 'Login'
         }
+    }
+
+    checkLogout = () =>{
+        console.log(sessionStorage.getItem('auth'))
+            if(sessionStorage.getItem('auth')){
+                return (
+                <>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={this.Logout} >Logout</NavDropdown.Item>
+                </>
+                )
+            }
     }
 
     navigateProfile = () =>{
@@ -81,12 +92,50 @@ class Header extends Component{
         }
     }
 
+    /*componentDidUpdate(){
+        if(window.para)
+    }*/
+
     Logout = () =>{
         sessionStorage.clear()
         if(window.location.href.search('login') < 1){
-            window.location.href = '/'
+            store.addNotification({
+                title: "Logout!",
+                message:"You're already logout, Click here to proceed",
+                type: "warning",
+                click: true,
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                onRemoval: (id, removedBy) => {
+                    window.location.href = ''
+                  },
+                dismiss: {
+                    duration: 2000,
+                    onScreen: true
+                },
+                click: true
+            });
         }else{
-            window.location.href = window.location.href 
+            store.addNotification({
+                title: "Logout!",
+                message:"You're already logout, Click here to proceed",
+                type: "warning",
+                click: true,
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                onRemoval: (id, removedBy) => {
+                    window.location.href = window.location.href
+                  },
+                dismiss: {
+                    duration: 2000,
+                    onScreen: true
+                },
+                click: true
+            });
         }
     }
 
@@ -96,16 +145,13 @@ class Header extends Component{
             right:'50px'
         }
 
-        //const auth = 'Anonymous'
-        if(sessionStorage.getItem('auth')){
-            //auth = sessionStorage.getItem('auth')
-        }
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
         //console.log(this.props.auth)
         return(  
             <header>
+                <ReactNotification  />
                 <Navbar bg="light" expand="lg">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -126,12 +172,11 @@ class Header extends Component{
                 </Col>
                 <Col>
                 <Nav className="justify-content-end">
-                <NavDropdown title={this.checkLogin()} id="collasible-nav-dropdown">
+                <NavDropdown title={this.checkLogin('Login')} id="collasible-nav-dropdown">
                     <NavDropdown.Item href={this.navigateProfile()}>{this.checkLogin()}</NavDropdown.Item>
                     <NavDropdown.Divider />               
-                    <NavDropdown.Item href="/register">Register</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={this.Logout} >logout</NavDropdown.Item>
+                    <NavDropdown.Item href="/register">Register</NavDropdown.Item>  
+                    {this.checkLogout()}
                 </NavDropdown>
                 </Nav>
                 </Col>
@@ -144,7 +189,7 @@ class Header extends Component{
 }
 const mapStateToProps = state =>({
     auth: state.auth.user,
-    loggingIn: state.auth.loggingIn
+    notify: state.auth.notify
 })
   
   //export default connect(mapState)(Header)
