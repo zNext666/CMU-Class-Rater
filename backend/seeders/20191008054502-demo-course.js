@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Courses', [{
-      course_no: 261361,
+      course_no: "261361",
       name: 'Software Engineering',
       section: 11,
       teacher:'Lachana Ramingwong, PhD, Assistant Professor',
@@ -12,7 +12,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: 269340,
+      course_no: "269340",
       name: 'Data Centric Application Development',
       section: 11,
       teacher:'Pruet Boonma, Ph.D.',
@@ -21,7 +21,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: 261434,
+      course_no: "261434",
       name: 'Network Design and Mangement',
       section: 11,
       teacher:'Aj.Yuthapong',
