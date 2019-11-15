@@ -1,28 +1,32 @@
 const initState = {
     user:[],
-    loggingIn:[]
+    notify:''
 }
 
 const authReducer = (state = initState, action) => {
     switch(action.type){
         case 'LOGIN':
-            sessionStorage.setItem('auth', action.data.username);
-            sessionStorage.setItem('uid', action.data.id);
-            console.log('login', action.data, sessionStorage.getItem('auth'))
+            sessionStorage.setItem('auth', action.payload.data.username);
+            sessionStorage.setItem('uid', action.payload.data.id);
+            console.log('login', action.payload.data, sessionStorage.getItem('auth'))
             return {
-                user:  action.data,
-                loggingIn: true
+                user:  action.payload.data,
+                notify: action.payload.status
             }
         case 'LOGIN_ERROR':
-            console.log('login error', action.data)
-            return state
+            console.log('login error', action.payload.data, action.payload.status)
+            return {
+                ...state,
+                user:  action.payload.data,
+                notify: action.payload.status
+            }
         case 'LOGIN_FACEBOOK':
                 console.log('login facebook', action.payload)
                 sessionStorage.setItem('auth', action.payload.name);
                 sessionStorage.setItem('uid', action.payload.id);
             return {
                 user: action.payload,
-                loggingIn: true
+                notify: action.payload.status
             }
         default:
             return state

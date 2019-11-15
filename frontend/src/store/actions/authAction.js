@@ -2,17 +2,19 @@ import axios from 'axios'
 
 export const Login = (a) =>{
     return async(dispatch, getState) => {
-        const res = await axios.post('http://localhost:8000/api/users/login', a)
-        const data = await res.data
-        const status = await res.status
-        console.log(status)
-        if(status == 200){
+        let status = 422
+        try {
+            const res = await axios.post('http://localhost:8000/api/users/login', a)
+            const data = await res.data
+            status = await res.status
+            console.log(status)
             dispatch({
-                type: 'LOGIN', data
+                type: 'LOGIN', payload:{data:data,status:status}
             })
-        }else{
+        } catch (error) {
+            console.log(error, status)
             dispatch({
-                type: 'LOGIN_ERROR', data
+                type: 'LOGIN_ERROR', payload:{data:error,status:status}
             })
         }
     }
