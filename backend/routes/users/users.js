@@ -45,4 +45,16 @@ router.post('/login',(req,res) => {
     })
 })
 
+router.put('/login',(req,res)=>{
+    User.upsert({
+        
+    },{
+        returning:true
+    }).then(data =>{
+        return res.json(data)
+    }).catch(error => {
+        console.log(error)
+        return res.status(500)
+    })
+})
 module.exports = router
