@@ -23,7 +23,7 @@ module.exports = {
         }
       },
       op: {
-        type: Sequelize.ENUM('0', '1','2')
+        type: Sequelize.ENUM('0', '1','2')  // 0 : default, 1 : like, 2 : dislike
       },
       createdAt: {
         allowNull: false,
