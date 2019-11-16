@@ -7,7 +7,7 @@ class ListCourse extends Component{
     constructor() {
         super()
         this.state = {
-            courses:[]
+            courses:[],
         }
     }
 

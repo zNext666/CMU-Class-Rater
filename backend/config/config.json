@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
-    "database": "classrate",
+    "password": "root",
+    "database": "cmuclassrater",
     "host": "127.0.0.1",
     "dialect": "mariadb",
     "operatorsAliases": false
