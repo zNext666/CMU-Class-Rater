@@ -150,7 +150,7 @@ class Header extends Component{
         ))
         //console.log(this.props.auth)
         return(  
-            <header>
+            <><header>
                 <ReactNotification  />
                 <Navbar bg="light" expand="lg">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -165,10 +165,11 @@ class Header extends Component{
                 <Nav className="justify-content-center">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
-                    <Dropdown>{search}</Dropdown>
+                    
                     <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
                 </Form>
                 </Nav>
+                <Dropdown style={{position: 'absolute', background:'white', zIndex: 1}} >{search}</Dropdown>
                 </Col>
                 <Col>
                 <Nav className="justify-content-end">
@@ -177,13 +178,12 @@ class Header extends Component{
                     <NavDropdown.Divider />               
                     <NavDropdown.Item href="/register">Register</NavDropdown.Item>  
                     {this.checkLogout()}
-                </NavDropdown>
+                </NavDropdown>               
                 </Nav>
                 </Col>
-                </Navbar.Collapse>
+                </Navbar.Collapse>      
                 </Navbar>
-
-            </header>
+            </header></>    
         )
     }
 }

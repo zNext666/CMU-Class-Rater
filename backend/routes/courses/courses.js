@@ -6,7 +6,7 @@ const Review = db.Review
 
 router.get('',(req,res) => {
     Course.findAll({
-      attributes : [['course_no','id'],'name','section','teacher','description']
+      attributes : ['course_no','name','section','teacher','description']
     }).then((data) => {
       res.json(data)
     }).catch((error) => {

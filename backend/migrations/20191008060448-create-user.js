@@ -8,6 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      uid: {
+        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.TEXT
+      }
+      ,
       username: {
         type: Sequelize.STRING
       },
@@ -15,9 +22,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       display_name:{
-        type: Sequelize.STRING(500)
-      },
-      fullname:{
         type: Sequelize.STRING(500)
       },
       password: {
