@@ -208,7 +208,7 @@ class Header extends Component{
         return(  
             <header>
                 <ReactNotification  />
-                <Navbar bg="light" expand="lg">
+                <Navbar style={{backgroundColor: "lightblue"}}>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Col>
