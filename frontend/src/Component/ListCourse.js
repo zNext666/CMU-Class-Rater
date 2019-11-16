@@ -27,7 +27,6 @@ class ListCourse extends Component{
                     <Card.Title>{item.course_no} {item.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Section: {item.section}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{item.teacher}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">Average: {item.Reviews[0].average}</Card.Subtitle>
                 </a>
             </Card.Body>
             </Card>
