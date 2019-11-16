@@ -15,8 +15,7 @@ class ListCourse extends Component{
         const response = await axios.get('http://localhost:8000/api/courses')
         const data = await response.data
         this.setState({courses:data})
-        
-        console.log(this.state.courses)
+        console.log(data)
     }
 
     render(){

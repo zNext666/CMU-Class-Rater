@@ -106,14 +106,15 @@ class Review extends Component{
     }
 
     render(){     
-        const comment = this.state.comment.map(comm => (
-            <Card.Body key={comm.id}>
+        const comment = this.state.comment.map(comm => {
+            let color = 'action'
+            return (<Card.Body key={comm.id}>
                 <Box>
                     <h5>{comm.User.username}</h5>
                     <Navbar>
                         <Rating value={comm.rate} readOnly />
                         <ListItemSecondaryAction>
-                            <IconButton edge="end">
+                            <IconButton edge="end" color={color} >
                                 <ThumbUpAlt />
                             </IconButton>
                         </ListItemSecondaryAction>
@@ -121,7 +122,7 @@ class Review extends Component{
                     <p>{comm.comment}</p>
                 </Box>
             </Card.Body>
-        ))
+    )} )
         return (
             <>
             <ReactNotification />

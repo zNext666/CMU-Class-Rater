@@ -7,13 +7,12 @@ import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
-import { Autocomplete } from '@material-ui/lab';
-import { TextField } from '@material-ui/core';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import {connect} from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles';
+
+
 
 class Header extends Component{
 
@@ -34,7 +33,6 @@ class Header extends Component{
     }
 
     getData = async () => {     
-        //if(this.state.query!='') {
         try {
             const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
             const data = await response.data
@@ -44,12 +42,6 @@ class Header extends Component{
         } catch (error){
             console.log(error)
         }
-    //}
-    }
-
-
-    componentDidMount(){
-        this.getData()
     }
 
     handleChange = event => {
@@ -99,9 +91,6 @@ class Header extends Component{
         }
     }
 
-    /*componentDidUpdate(){
-        if(window.para)
-    }*/
 
     Logout = () =>{
         sessionStorage.clear()
@@ -146,97 +135,53 @@ class Header extends Component{
         }
     }
 
-    setQuery = (param) =>{
-        console.log(param)
-        //this.setState({query:param})
-    }
-
     render(){
         const style={
             position:'absolute',
             right:'50px'
         }
-
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
-
-        const useStyles = makeStyles({
-            option: {
-              fontSize: 15,
-              '& > span': {
-                marginRight: 10,
-                fontSize: 18,
-              },
-            },
-          });
-          const classes = useStyles;
-          const course = 
-            <Autocomplete
-            //onChange = {this.state.query}
-                id="country-select-demo"
-                style={{ width: 300 }}
-                options={this.state.data}
-                classes={{
-                    option: classes.option,
-                }}
-                autoHighlight
-                getOptionLabel={option => option.name}
-                renderOption={option => (
-                    <React.Fragment>                       
-                     {option.course_no} {option.name}
-                    </React.Fragment>
-                )}
-                renderInput={params => {
-                    onchange =this.setQuery({query:params.inputProps.value})
-                    return (
-                <TextField
-                    {...params}
-                    label="Choose a course"
-                    variant="outlined"
-                    fullWidth
-                    inputProps={{
-                        ...params.inputProps,
-                        autoComplete: 'disabled', // disable autocomplete and autofill
-                    }}
-                    />
-                    )}}
-                />
   
 
         //console.log(this.props.auth)
         return(  
-            <header>
+            <><header>
                 <ReactNotification  />
-                <Navbar style={{backgroundColor: "lightblue"}}>
+                <Navbar style={{backgroundColor: "#a94dff"}} variant="dark">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/"><HomeSharpIcon/></Nav.Link>
+                    <Nav.Link href="/"><HomeSharpIcon /></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
                 <Nav className="justify-content-center">
-                {course}
-                <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
+
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
+                    
+                    <Button variant="primary" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
+                </Form>
                 </Nav>
+                <Dropdown style={{position: 'absolute', background:'white', zIndex: 1}} >{search}</Dropdown>
                 </Col>
                 <Col>
-                <Nav className="justify-content-end">
+                <Nav className="justify-content-end" id="nav-dropdown" >
                 <NavDropdown title={this.checkLogin('Login')} id="collasible-nav-dropdown">
                     <NavDropdown.Item href={this.navigateProfile()}>{this.checkLogin()}</NavDropdown.Item>
                     <NavDropdown.Divider />               
                     <NavDropdown.Item href="/register">Register</NavDropdown.Item>  
                     {this.checkLogout()}
-                </NavDropdown>
+                </NavDropdown>               
                 </Nav>
                 </Col>
-                </Navbar.Collapse>
+                </Navbar.Collapse>      
                 </Navbar>
-
-            </header>
+            </header></>    
         )
     }
 }

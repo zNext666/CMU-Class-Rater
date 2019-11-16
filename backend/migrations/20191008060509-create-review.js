@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       course_no: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         references: {         // User belongsTo Company 1:1
           model: 'Courses',
           key: 'course_no'
