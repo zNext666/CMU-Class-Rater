@@ -20,7 +20,7 @@ class ListCourse extends Component{
 
     render(){
         const course = this.state.courses.map((item) => (
-            <Card key={item.course_no} style={{ width: '18rem' , border: "3px solid lightgrey" }}>
+            <Card key={item.course_no} style={{ width: '18rem' , border: "3px solid lightgrey",height:'14rem',borderRadius: "10px" }}>
                 <Card.Body>
                 <a href={"review/"+ item.course_no} >
                     <Card.Title>{item.course_no} {item.name}</Card.Title>
