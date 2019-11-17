@@ -26,6 +26,12 @@ class Main extends Component{
     }
 
     render(){
+        const navstyle = {
+            backgroundColor: "#ffffff" , 
+            borderRadius: "5px" , 
+            margin: "5px", 
+            border: "1px solid lightgrey" 
+          };
         /*const course = this.state.courses.map((item) => (
             <Card key={item.course_no} style={{ width: '18rem' }}>
                 <Card.Body>
@@ -43,13 +49,13 @@ class Main extends Component{
             <Row>
                 <Col sm={8}>
                     <Nav variant="pills" defaultActiveKey="/home">
-                            <Nav.Item>
+                            <Nav.Item style={navstyle}>
                                 <Nav.Link eventKey="link-1">ความนิยม</Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
+                            <Nav.Item style={navstyle}>
                                 <Nav.Link eventKey="link-2">คะแนนมากที่สุด</Nav.Link>
                             </Nav.Item>
-                            <NavDropdown title="หน่วยกิต" id="nav-dropdown">
+                            <NavDropdown title="หน่วยกิต" id="nav-dropdown" style={navstyle}>
                                 <NavDropdown.Item eventKey="1">มากไปน้อย</NavDropdown.Item>
                                 <NavDropdown.Item eventKey="2">น้อยไปมาก</NavDropdown.Item>
                             </NavDropdown>

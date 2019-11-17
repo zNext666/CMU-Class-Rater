@@ -155,7 +155,7 @@ class Header extends Component{
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/"><HomeSharpIcon /></Nav.Link>
+                    <Nav.Link href="/"><HomeOutlinedIcon /></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
