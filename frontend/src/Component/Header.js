@@ -11,6 +11,8 @@ import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import {connect} from 'react-redux'
 
+
+
 class Header extends Component{
 
     constructor(){
@@ -29,7 +31,7 @@ class Header extends Component{
         console.log(this.state.query)
     }
 
-    getData = async () => {       
+    getData = async () => {     
         try {
             const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
             const data = await response.data
@@ -88,9 +90,6 @@ class Header extends Component{
         }
     }
 
-    /*componentDidUpdate(){
-        if(window.para)
-    }*/
 
     Logout = () =>{
         sessionStorage.clear()
@@ -141,25 +140,27 @@ class Header extends Component{
             position:'absolute',
             right:'50px'
         }
-
         const search = this.state.data.map(item => (
                 <a href={this.filterUrl(item.course_no)}><ListGroup.Item>{item.course_no} {item.name}</ListGroup.Item></a> 
         ))
+  
+
         //console.log(this.props.auth)
         return(  
             <><header>
                 <ReactNotification  />
-                <Navbar expand="lg" style={{backgroundColor: "#BC77FF"}}>
+                <Navbar style={{backgroundColor: "#a94dff"}} variant="dark">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/" ><HomeOutlinedIcon style={{fontSize: "30", float: "both"}} /></Nav.Link>
+                    <Nav.Link href="/"><HomeSharpIcon /></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
                 <Nav className="justify-content-center">
+
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
                     
@@ -169,7 +170,7 @@ class Header extends Component{
                 <Dropdown style={{position: 'absolute', background:'white', zIndex: 1}} >{search}</Dropdown>
                 </Col>
                 <Col>
-                <Nav className="justify-content-end">
+                <Nav className="justify-content-end" id="nav-dropdown" >
                 <NavDropdown title={this.checkLogin('Login')} id="collasible-nav-dropdown">
                     <NavDropdown.Item href={this.navigateProfile()}>{this.checkLogin()}</NavDropdown.Item>
                     <NavDropdown.Divider />               

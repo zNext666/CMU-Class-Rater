@@ -16,6 +16,22 @@ class App extends Component {
               horizontal: true,
           }
       },
+      colors: ['#ffce00'],//เปลี่ยนสี
+
+        tooltip: { //ส่วนของตัวhoverเวลาเอาเมาส์ไปชี้แท่งกราฟ
+          theme: 'dark',//พื้นหลัง hover สีดำ
+          x: {
+            show: false
+          },
+          y: {
+            title: {
+              formatter: function () {
+                return ''
+              }
+            }
+          }
+        },
+
       
         xaxis: {
           categories: [1,2,3,4,5]
