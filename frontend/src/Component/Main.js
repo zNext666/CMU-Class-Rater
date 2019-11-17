@@ -7,6 +7,9 @@ import {Nav,Navbar,NavDropdown} from 'react-bootstrap';
 import {Row ,Col}  from 'react-bootstrap';
 import {Pagination } from 'react-bootstrap'
 import {BrowserRouter as Router, Route, Link,Switch} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {changePage} from '../store/actions/pageAction'
+import zIndex from '@material-ui/core/styles/zIndex'
 
 
 class Main extends Component{
@@ -14,15 +17,21 @@ class Main extends Component{
         super()
         this.state = {
             courses:[],
+            pages:'',
+            currentPage: 1
         }
+    }
+
+    handlClick = (e) =>{
+        this.props.changePage(e.target.id)
     }
 
     async componentDidMount(){
         const response = await axios.get('http://localhost:8000/api/courses')
         const data = await response.data
-        this.setState({courses:data})
-        
-        console.log(this.state.courses)
+        const pages = Math.round((data.count)/9)
+        this.setState({courses:data.rows, pages: pages})     
+        console.log('page: ' + this.state.pages)
     }
 
     render(){
@@ -44,8 +53,24 @@ class Main extends Component{
             </Card.Body>
             </Card>
         ))*/
+let items = [];
+for (let number = 1; number <= this.state.pages; number++) {
+  items.push(number);
+}
+let bestkub = items.map(i =>{
+    return (
+        <Pagination.Item style={{zIndex:0}} id={i} key={i} active={i == this.props.page} onClick={this.handlClick}>{i}</Pagination.Item>
+    )
+})
+
+const pages = (
+  <>
+    <Pagination>{items}</Pagination>
+  </>
+);
         return (<>
             <br />
+        {console.log('page: '+this.props.page)}
             <Row>
                 <Col sm={8}>
                     <Nav variant="pills" defaultActiveKey="/home">
@@ -62,22 +87,31 @@ class Main extends Component{
                     </Nav>
                 </Col>
                 <Col sm={4}>
-                    <Pagination>
-                        <Pagination.Prev />
-                        <Pagination.Item active>{1}</Pagination.Item>
-                        <Pagination.Item >{2}</Pagination.Item>
-                        <Pagination.Next />
+                    <Pagination >
+                        {bestkub}
                     </Pagination>
                 </Col>
             </Row>
             <Router>
                 <Switch>
                     <Route path="/search" component={SearchCourse}></Route>
-                    <Route path="/" component={ListCourse}></Route>
+                    <Route path="/" render={(props) => <ListCourse {...props} page={this.props.page} />}></Route>
                 </Switch>
             </Router>
         </>)
     }
 }
 
-export default Main
+const mapStateToProps = (state) =>{
+    return {
+        page: state.page.page
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changePage: (page) => dispatch(changePage(page))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

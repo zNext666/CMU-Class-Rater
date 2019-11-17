@@ -14,8 +14,16 @@ class ListCourse extends Component{
     async componentDidMount(){
         const response = await axios.get('http://localhost:8000/api/courses')
         const data = await response.data
-        this.setState({courses:data})
+        this.setState({courses:data.rows})
         console.log(data)
+    }
+
+    async componentWillReceiveProps(nextProps){
+        const response = await axios.get('http://localhost:8000/api/courses?page=' + nextProps.page)
+        console.log('next page ' + nextProps.page)
+        const data = await response.data
+        this.setState({courses:data.rows})
+        console.log('new data ', data)
     }
 
     render(){
