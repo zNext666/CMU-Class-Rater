@@ -209,6 +209,168 @@ module.exports = {
       credit: 3,
       createdAt: new Date(),
       updatedAt: new Date()
+    },{
+      course_no: "269105",
+      name: 'ISNE Lab 1',
+      section: 011,
+      teacher:'Kenneth Cosh',
+      description:' High-level software description. Software development using integrated development environment. Software unit testing. Versioning systems. Documentation. Software development best-practice.',
+      credit: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "001201",
+      name: 'Critical Reading and Effective Writing',
+      section: 1,
+      teacher:'Staff',
+      description:'English language skills for critical reading from different sources and media and effective writing on topics of students’ interests.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "001225",
+      name: 'English in Science and Technology Context',
+      section: 1,
+      teacher:'Staff',
+      description:' Specific language functions, components and skills for effective communication in science and technology contexts.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "259103",
+      name: 'Engineering Materials',
+      section: 1,
+      teacher:'Anirut Chaijaruwanich',
+      description:' Background and classification of engineering materials: metals, plastics, ceramic, asphalt, wood and concrete. Production processes for product using engineering materials. Macro and microstructures of engineering materials. Imperfections in solids; Phase equilibrium. Properties of material. Mechanical testing. Hardening and heat treatment processes. Corrosion reactions and corrosion control.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "261342	",
+      name: 'Fundamentals of Database Systems',
+      section: 1,
+      teacher:'Juggapong Natwichai	',
+      description:' Database concepts. Data modeling. Database design and engineering. Data model improvement. Query language. Physical database design. Efficient data retrieval and indexing. Query optimization. Basic concept of transaction, concurrency and recovery techniques. Trends in database systems technology.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "261343",
+      name: 'Database System Laboratory',
+      section: 1,
+      teacher:'Juggapong Natwichai',
+      description:'Database management system software installation. Database design. Query language. Database administration. Database application development.',
+      credit: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "269210",
+      name: 'Computer Architecture for Information Systems and Network Engineering',
+      section: 1,
+      teacher:'Sansanee Auephanwiriyakul	',
+      description:'Overview of computer organization and architecture. Computer evaluation and performance measurement. Number systems and computer arithmetic. Digital logic. Computer function and interconnection. Cache memory. Internal memory. External memory. Virtual memory. Instruction sets: Characteristics and functions. Instruction sets: addressing modes and formats. Processor structure and function. Advanced technology in computer architecture.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "057132",
+      name: 'Happy Life in Camping',
+      section: 1,
+      teacher:'Chinawat Kaiket ',
+      description:'Introduction to camping, philosophy and objectives. Kinds of camping. Camping activities. Nature study, forest and conservation. Planning of camping management and camping leader. Camping evaluation and practice on camping activities.',
+      credit: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "705191",
+      name: 'Smart Consumer',
+      section: 1,
+      teacher:'Ek Bunchua ',
+      description:'Roles of marketing in everyday life, understanding business marketing strategies, knowing consumer right, knowing how to be a smart consumer in sufficiency economy.',
+      credit: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "801100",
+      name: 'Architecture in Everyday Life',
+      section: 1,
+      teacher:'Ronawee Suwantamalee',
+      description:'The difference between building and architecture, Basic sciences and arts of architecture, Aesthetics in architecture, Architecture in everyday life, Styles and fashions of architecture, Roles and responsibilities of architects, How to start working with architects, Ideal architects versus ideal clients, Basic building laws and regulations, Basic building materials, How to read and understand architectural drawings, Fung-Shi and belief system in the understanding of architect, Past, Present and future of Thai and Lanna architecture, Green architecture and its sustainability.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "050106",
+      name: 'Humanistic arts',
+      section: 3,
+      teacher:'Naruemol Teerawat',
+      description:'The study of nature and the meaning of humanity to understand oneself and others; humanity in today’s environment; the purpose of human life; paths to fulfillment through humanistic arts, factual knowledge and installation of values; living and working together peacefully and with a sense of social responsibility.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "103262",
+      name: 'Vocal and chorus	',
+      section: 1,
+      teacher:'Khanithep Pitupumnak',
+      description:'Vocal, improving singing technique; voices and ears training; musical notation reading for vocal and chorus performs; chorus group performance.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "356102",
+      name: 'Ornamental aquatic animals',
+      section: 1,
+      teacher:'Mintra Seel- audom',
+      description:'Overview of ornamental aquatic animals, ornamental aquatic animals behavior, invertebrate ornamental aquatic animals, vertebrate ornamental aquatic animals, business of ornamental aquatic animals, ornamental aquatic animals for research, ornamental aquatic animals and human credulity, ornamental aquatic animals and environment, invasive ornamental aquatic animal species, and genetic improvement ornamental aquatic animal species.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "057137",
+      name: 'Sports for health	',
+      section: 1,
+      teacher:'Sarawut Pongpipat	',
+      description:'Team sports, individual sports and in-door sports to promote exercise, physical health, mental health and social health. (Select 1 team sport 1 individual sport and 1 in door sport)',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "057122",
+      name: 'Swimming for life and exercise',
+      section: 1,
+      teacher:'Natchajarn Rodwattanadisakul',
+      description:'The principles of exercise for health by Swimming. Warm up and cool down. Principles of breathing and movement under water. Using body physically to swim in each style. Helping others from dangers in swimming. Swimming for health and participation in competition at different levels. Benefits and etiquette for players and spectators.',
+      credit: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "011152",
+      name: 'Ethics for good qual of life	',
+      section: 1,
+      teacher:'Parud Boonsriton',
+      description:'Basic concepts of ethics. Ethical theories of life. Problems of life in contemporary society. Good quality of life. Ethical approaches to achieve good quality of life.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "261112",
+      name: 'Game Appreciation',
+      section: 1,
+      teacher:'Sakkasit Ramingwong',
+      description:'History of games and gaming industry. Components and characteristics of games. Overview of gaming technology. Concept of game development. Classification of games. First and second generations of games. Third and fourth generations of games. Fifth and sixth generations of games. Seventh and eithth generations of games. Effects of game in Thai society. Effects of game in international society. Case studies.',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      course_no: "261111",
+      name: 'Internet and Online Community',
+      section: 1,
+      teacher:'Navadon Khunlertgit',
+      description:'',
+      credit: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   ], {});
   },
