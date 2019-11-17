@@ -11,7 +11,6 @@ import {Container,Row,Col} from 'react-bootstrap'
 
 export default function Page(){
     return(
-        <Router>
             <>
             <Header />
             <Container >
@@ -34,7 +33,6 @@ export default function Page(){
             </Container>
 
             </>
-        </Router> 
     )
 }
 

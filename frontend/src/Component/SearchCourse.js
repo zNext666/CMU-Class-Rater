@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Card,CardColumns   } from 'react-bootstrap'
-import {Container,Row,Col}  from 'react-bootstrap'
 
 class ListCourse extends Component{
     constructor() {

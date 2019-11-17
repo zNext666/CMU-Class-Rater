@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Rating from '@material-ui/lab/Rating'
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Form, Card, Button } from 'react-bootstrap'
 import {ListItemSecondaryAction} from '@material-ui/core';
 import {IconButton} from '@material-ui/core';
 import {ThumbUpAlt} from '@material-ui/icons';
-import {List} from '@material-ui/core';
 import 'react-notifications-component/dist/theme.css'
 import ReactNotification,{ store } from 'react-notifications-component'
 import {Navbar} from 'react-bootstrap'

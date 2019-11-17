@@ -8,7 +8,7 @@ import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
-import HomeSharpIcon from '@material-ui/icons/HomeSharp';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import {connect} from 'react-redux'
 
 
@@ -93,7 +93,8 @@ class Header extends Component{
 
     Logout = () =>{
         sessionStorage.clear()
-        if(window.location.href.search('login') < 1){
+        window.location.href = '../'
+        /*if(window.location.href.search('login') < 1){
             store.addNotification({
                 title: "Logout!",
                 message:"You're already logout, Click here to proceed",
@@ -131,7 +132,7 @@ class Header extends Component{
                 },
                 click: true
             });
-        }
+        }*/
     }
 
     render(){

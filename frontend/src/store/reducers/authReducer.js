@@ -22,8 +22,8 @@ const authReducer = (state = initState, action) => {
             }
         case 'LOGIN_FACEBOOK':
                 console.log('login facebook', action.payload)
-                sessionStorage.setItem('auth', action.payload.name);
-                sessionStorage.setItem('uid', action.payload.id);
+                sessionStorage.setItem('auth', action.payload.data.username);
+                sessionStorage.setItem('uid', action.payload.data.id);
             return {
                 user: action.payload,
                 notify: action.payload.status
