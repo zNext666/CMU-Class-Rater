@@ -45,4 +45,33 @@ router.post('/login',(req,res) => {
     })
 })
 
+router.post('/login/facebook',(req,res) => {
+    User.findOne({
+        attributes : ['id', 'username','email','role','password'],
+        where: {
+          username:req.body.username
+        },order: db.sequelize.literal('createdAt DESC')
+    }).then(data => {
+        if(!data){
+            User.create({
+                uid:req.body.id,
+                display_name:req.body.username,
+                username:req.body.username,
+                email:req.body.email,
+                password:bcrypt.hashSync(req.body.id,saltRounds),
+                role:{role:['user']}
+            }).then(data=>{
+                res.json({
+                    id:data.id,
+                    username:data.display_name,
+                    email:data.email,
+                    role:data.role
+                })
+            })
+        }else{
+            res.json(data)
+        }
+    })
+})
+
 module.exports = router

@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Rating from '@material-ui/lab/Rating'
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Form, Card, Button } from 'react-bootstrap'
 import {ListItemSecondaryAction} from '@material-ui/core';
 import {IconButton} from '@material-ui/core';
 import {ThumbUpAlt} from '@material-ui/icons';
-import {List} from '@material-ui/core';
 import 'react-notifications-component/dist/theme.css'
 import ReactNotification,{ store } from 'react-notifications-component'
 import {Navbar} from 'react-bootstrap'
@@ -106,14 +104,15 @@ class Review extends Component{
     }
 
     render(){     
-        const comment = this.state.comment.map(comm => (
-            <Card.Body key={comm.id}>
+        const comment = this.state.comment.map(comm => {
+            let color = 'action'
+            return (<Card.Body key={comm.id}>
                 <Box>
-                    <h5>{comm.user_id}</h5>
+                    <h5>{comm.User.username}</h5>
                     <Navbar>
                         <Rating value={comm.rate} readOnly />
                         <ListItemSecondaryAction>
-                            <IconButton edge="end">
+                            <IconButton edge="end" color={color} >
                                 <ThumbUpAlt />
                             </IconButton>
                         </ListItemSecondaryAction>
@@ -121,7 +120,7 @@ class Review extends Component{
                     <p>{comm.comment}</p>
                 </Box>
             </Card.Body>
-        ))
+    )} )
         return (
             <>
             <ReactNotification />

@@ -7,7 +7,7 @@ class ListCourse extends Component{
     constructor() {
         super()
         this.state = {
-            courses:[]
+            courses:[],
         }
     }
 
@@ -15,11 +15,12 @@ class ListCourse extends Component{
         const response = await axios.get('http://localhost:8000/api/courses')
         const data = await response.data
         this.setState({courses:data})
+        console.log(data)
     }
 
     render(){
         const course = this.state.courses.map((item) => (
-            <Card key={item.course_no} style={{ width: '18rem' }}>
+            <Card key={item.course_no} style={{ width: '18rem' , border: "3px solid lightgrey" }}>
                 <Card.Body>
                 <a href={"review/"+ item.course_no} >
                     <Card.Title>{item.course_no} {item.name}</Card.Title>

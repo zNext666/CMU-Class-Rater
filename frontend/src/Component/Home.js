@@ -11,10 +11,9 @@ import {Container,Row,Col} from 'react-bootstrap'
 
 export default function Page(){
     return(
-        <Router>
             <>
             <Header />
-            <Container>
+            <Container >
                 <Row>
                     <Col></Col>
                     <Col xs={10}>  
@@ -34,7 +33,6 @@ export default function Page(){
             </Container>
 
             </>
-        </Router> 
     )
 }
 
