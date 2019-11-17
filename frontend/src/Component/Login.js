@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import {Container,Row,Col,Card,Form,Button}  from 'react-bootstrap'
-import FacebookProvider, {LoginButton } from 'react-facebook-sdk'
 import FacebookLogin from 'react-facebook-login';
-import axios from 'axios'
 import {connect} from 'react-redux'
 import {Login,LoginFacebook} from '../store/actions/authAction'
 import ReactNotification,{ store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
+import { isNull } from 'util';
 
 class LoginComponent extends Component{
     constructor(){
@@ -17,8 +16,13 @@ class LoginComponent extends Component{
         }
     }
     handleResponse = (data) => {
-        this.props.LoginFacebook(data) 
-        console.log(data)
+        let fbData = {
+            id:data.id,
+            username:data.name,
+            email:data.email
+        }
+        this.props.LoginFacebook(fbData) 
+        console.log(data, fbData)
     }
      
       handleError = (error) => {
@@ -43,11 +47,55 @@ class LoginComponent extends Component{
         })
     }
 
+    Logout = () =>{
+        sessionStorage.clear()
+        window.location.href = '../'
+        /*if(window.location.href.search('login') < 1){
+            store.addNotification({
+                title: "Logout!",
+                message:"You're already logout, Click here to proceed",
+                type: "warning",
+                click: true,
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                onRemoval: (id, removedBy) => {
+                    window.location.href = ''
+                  },
+                dismiss: {
+                    duration: 2000,
+                    onScreen: true
+                },
+                click: true
+            });
+        }else{
+            store.addNotification({
+                title: "Logout!",
+                message:"You're already logout, Click here to proceed",
+                type: "warning",
+                click: true,
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                onRemoval: (id, removedBy) => {
+                    window.location.href = window.location.href
+                  },
+                dismiss: {
+                    duration: 2000,
+                    onScreen: true
+                },
+                click: true
+            });
+        }*/
+    }
+
     componentWillReceiveProps (nextprops) {
-        if(nextprops.notify != this.props.notify){
             const notify = nextprops.notify;
             if (notify == 200) {
-                store.addNotification({
+                window.location.href = '../'
+                /*store.addNotification({
                     title: "Login success!",
                     message: 'Click here to proceed...',
                     type: "success",
@@ -63,7 +111,7 @@ class LoginComponent extends Component{
                         duration: 2000,
                         onScreen: true
                     }
-                });
+                });*/
             }else{
                 store.addNotification({
                     title: "Error!",
@@ -80,12 +128,12 @@ class LoginComponent extends Component{
                     }
             });
         }
-    }
 }
 
     render(){
         return(
             <Container>
+                {isNull(sessionStorage.getItem('auth'))  ? (<>
                 <ReactNotification  />
                 <Row>
                 <Col>
@@ -133,7 +181,13 @@ class LoginComponent extends Component{
                 </Col>
                 <Col>
                 </Col>
-                </Row>
+                </Row></>
+                ) : (
+                    <>
+                        <p><h1>You're already logging in</h1></p>
+                        <p><h2>Please, <Button variant="light" onClick={this.Logout} >Log out</Button></h2></p>
+                    </>
+                )}
             </Container>
         )
     }

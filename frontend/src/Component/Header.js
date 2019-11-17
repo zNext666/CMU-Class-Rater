@@ -7,12 +7,8 @@ import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
-import { Autocomplete } from '@material-ui/lab';
-import { TextField } from '@material-ui/core';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import { Switch } from '@material-ui/core';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
-import HomeSharpIcon from '@material-ui/icons/HomeSharp';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import {connect} from 'react-redux'
 
 class Header extends Component{
@@ -98,7 +94,8 @@ class Header extends Component{
 
     Logout = () =>{
         sessionStorage.clear()
-        if(window.location.href.search('login') < 1){
+        window.location.href = '../'
+        /*if(window.location.href.search('login') < 1){
             store.addNotification({
                 title: "Logout!",
                 message:"You're already logout, Click here to proceed",
@@ -136,7 +133,7 @@ class Header extends Component{
                 },
                 click: true
             });
-        }
+        }*/
     }
 
     render(){
@@ -152,13 +149,13 @@ class Header extends Component{
         return(  
             <><header>
                 <ReactNotification  />
-                <Navbar bg="light" expand="lg">
+                <Navbar expand="lg" style={{backgroundColor: "#BC77FF"}}>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/"><HomeSharpIcon/></Nav.Link>
+                    <Nav.Link href="/" ><HomeOutlinedIcon style={{fontSize: "30", float: "both"}} /></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
@@ -166,7 +163,7 @@ class Header extends Component{
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleChange}/>
                     
-                    <Button variant="outline-success" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
+                    <Button variant="primary" onClick={this.handleClickSearch}><SearchSharpIcon/></Button>
                 </Form>
                 </Nav>
                 <Dropdown style={{position: 'absolute', background:'white', zIndex: 1}} >{search}</Dropdown>
