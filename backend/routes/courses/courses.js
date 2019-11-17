@@ -5,8 +5,15 @@ const Course = db.Course
 const Review = db.Review
 
 router.get('',(req,res) => {
-    Course.findAll({
-      attributes : ['course_no','name','section','teacher','description']
+  var offset = 0
+  if(req.query.page != null && req.query.page > 0){
+    offset = req.query.page - 1
+  }
+  console.log('page: ' + req.query.page)
+    Course.findAndCountAll({
+      attributes : ['course_no','name','section','teacher','description'],
+      offset: offset,
+      limit: 9
     }).then((data) => {
       res.json(data)
     }).catch((error) => {
