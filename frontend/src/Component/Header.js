@@ -7,7 +7,6 @@ import {Nav,Form,Navbar,FormControl,Button,Dropdown} from 'react-bootstrap';
 import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import {connect} from 'react-redux'

@@ -14,7 +14,7 @@ export default function Page(){
         <Router>
             <>
             <Header />
-            <Container>
+            <Container >
                 <Row>
                     <Col></Col>
                     <Col xs={10}>  
