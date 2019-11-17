@@ -13,7 +13,7 @@ export default function Page(){
     return(
             <>
             <Header />
-            <Container >
+            <Container style={{ width: '650rem',backgroundColor:"#F7F7F7",borderRadius: "10px"}} >
                 <Row>
                     <Col></Col>
                     <Col xs={10}>  

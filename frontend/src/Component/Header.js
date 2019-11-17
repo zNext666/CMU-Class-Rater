@@ -8,7 +8,7 @@ import {ListGroup}  from 'react-bootstrap';
 import {Col}  from 'react-bootstrap';
 import {NavDropdown }  from 'react-bootstrap';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import HomeSharpIcon from '@material-ui/icons/HomeSharp';
 import {connect} from 'react-redux'
 
 
@@ -155,7 +155,7 @@ class Header extends Component{
                 <Col>
                 <Nav className="mr-auto">
                     <Navbar.Brand href="/">CMU Class Rater</Navbar.Brand>
-                    <Nav.Link href="/"><HomeOutlinedIcon /></Nav.Link>
+                    <Nav.Link href="/"><HomeSharpIcon /></Nav.Link>
                 </Nav>
                 </Col>
                 <Col>
