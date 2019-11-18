@@ -212,7 +212,7 @@ module.exports = {
     },{
       course_no: "269105",
       name: 'ISNE Lab 1',
-      section: 011,
+      section: 11,
       teacher:'Kenneth Cosh',
       description:' High-level software description. Software development using integrated development environment. Software unit testing. Versioning systems. Documentation. Software development best-practice.',
       credit: 1,
