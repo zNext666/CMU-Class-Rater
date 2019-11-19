@@ -9,21 +9,27 @@ router.get('',(req,res) => {
   if(req.query.page != null && req.query.page > 0){
     offset = 9*(req.query.page - 1)
   }
-  console.log('page: ' + req.query.page)
     Course.findAndCountAll({
+      include:[{
+        models:db.Review,
+        attributes:['rate'],
+        required: false
+      }],
       attributes : ['course_no','name','section','teacher','description'],
       offset: offset,
       limit: 9
     }).then((data) => {
       res.json(data)
     }).catch((error) => {
-      res.status(500)
+      console.log(error)
+      res.status(500).send(error)
     })
   })
 
-  router.get('/test',(req,res)=>{
-    return db.sequelize.query('SELECT AVG(reviews.rate) AS average, courses.course_no FROM courses LEFT JOIN reviews ON courses.course_no = reviews.course_no GROUP BY courses.course_no').then((data)=>{
-      res.json(data[0])
+  router.get('/raw',(req,res)=>{
+    db.sequelize.query("SELECT ( SELECT COUNT(*) FROM courses ) AS COUNT_ROWS, courses.`course_no`, courses.`name`, courses.`teacher`, courses.`section`, courses.`description`, AVG(reviews.`rate`) AS `average` FROM courses LEFT OUTER JOIN reviews ON courses.course_no = reviews.course_no GROUP BY courses.course_no")
+    .then(result => {
+      res.json(result[0])
     })
   })
   
