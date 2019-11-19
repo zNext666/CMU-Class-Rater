@@ -84,7 +84,7 @@ class Course extends Component{
                     <Card.Text>
                     <Col>
                     <Row>
-                        Average: {parseFloat(this.state.avg.average).toFixed(2)}
+                        Average: {isNaN(this.state.avg.average) ? parseFloat(this.state.avg.average).toFixed(2) : 'No average'}
                     </Row>
                     <Row>
                         <Rating name="half-rating" value={this.state.avg.average} precision={0.1} readOnly />
