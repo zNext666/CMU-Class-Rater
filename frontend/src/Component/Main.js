@@ -27,11 +27,22 @@ class Main extends Component{
     }
 
     async componentDidMount(){
-        const response = await axios.get('http://localhost:8000/api/courses')
-        const data = await response.data
-        const pages = Math.round((data.count)/9)
-        this.setState({courses:data.rows, pages: pages})     
-        console.log('page: ' + this.state.pages)
+        if(window.location.pathname.search('search') > 0){
+            let searchCourses = axios.get('http://localhost:8000/api/course/search?search=' + window.location.pathname.split('/')[2])
+            .then(res => {
+                const pages = Math.round((res.data.count)/9)
+                this.setState({pages: pages})     
+                console.log('page: ' + this.state.pages)
+            })
+            console.log("search")
+        }else{
+            const response = await axios.get('http://localhost:8000/api/courses')
+            const data = await response.data
+            const pages = Math.round((data.count)/9)
+            this.setState({courses:data.rows, pages: pages})     
+            console.log('page: ' + this.state.pages)
+            console.log("normal")
+        }
     }
 
     render(){
@@ -58,9 +69,10 @@ for (let number = 1; number <= this.state.pages; number++) {
   items.push(number);
 }
 let bestkub = items.map(i =>{
+    console.log(window.location.pathname)
     return (
-        <Pagination.Item style={{zIndex:0}} id={i} key={i} active={i == this.props.page} onClick={this.handlClick}>{i}</Pagination.Item>
-    )
+            <Pagination.Item style={{zIndex:0}} id={i} key={i} active={i == this.props.page} onClick={this.handlClick}>{i}</Pagination.Item>
+        )      
 })
 
 const pages = (
@@ -75,7 +87,7 @@ const pages = (
                 <Col sm={8}>
                     <Nav variant="pills" defaultActiveKey="/home">
                             <Nav.Item style={navstyle}>
-                                <Nav.Link eventKey="link-1">ความนิยม</Nav.Link>
+                                <Nav.Link eventKey="link-1">ความนิยมมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <Nav.Item style={navstyle}>
                                 <Nav.Link eventKey="link-2">คะแนนมากที่สุด</Nav.Link>
@@ -94,7 +106,7 @@ const pages = (
             </Row>
             <Router>
                 <Switch>
-                    <Route path="/search" component={SearchCourse}></Route>
+                    <Route path="/search" render={(props) => <SearchCourse {...props} page={this.props.page} />}></Route>
                     <Route path="/" render={(props) => <ListCourse {...props} page={this.props.page} />}></Route>
                 </Switch>
             </Router>

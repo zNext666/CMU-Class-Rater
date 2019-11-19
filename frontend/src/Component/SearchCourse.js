@@ -11,12 +11,21 @@ class ListCourse extends Component{
         }
     }
 
+    async componentWillReceiveProps(nextProps){
+        const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query  + '&page=' + nextProps.page)
+        console.log('next page ' + nextProps.page)
+        const data = await response.data
+        this.setState({courses:data.rows})
+        console.log('new data ', data)
+    }
+
     async componentDidMount(){
         const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
         const data = await response.data
-        this.setState({courses:data})
-        console.log(this.state.query)
+        this.setState({courses:data.rows})
+        console.log(this.state.query, this.state.courses)
     }
+    
 
     render(){
         const course = this.state.courses.map((item) => (

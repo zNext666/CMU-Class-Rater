@@ -7,7 +7,7 @@ const Review = db.Review
 router.get('',(req,res) => {
   var offset = 0
   if(req.query.page != null && req.query.page > 0){
-    offset = req.query.page - 1
+    offset = 9*(req.query.page - 1)
   }
   console.log('page: ' + req.query.page)
     Course.findAndCountAll({
@@ -18,6 +18,12 @@ router.get('',(req,res) => {
       res.json(data)
     }).catch((error) => {
       res.status(500)
+    })
+  })
+
+  router.get('/test',(req,res)=>{
+    return db.sequelize.query('SELECT AVG(reviews.rate) AS average, courses.course_no FROM courses LEFT JOIN reviews ON courses.course_no = reviews.course_no GROUP BY courses.course_no').then((data)=>{
+      res.json(data[0])
     })
   })
   

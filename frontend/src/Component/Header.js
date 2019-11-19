@@ -35,7 +35,7 @@ class Header extends Component{
         try {
             const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
             const data = await response.data
-            this.setState({data:data})
+            this.setState({data:data.rows})
             console.log(this.state.data)
             console.log(this.state.query)
         } catch (error){
