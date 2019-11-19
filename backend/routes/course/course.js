@@ -4,29 +4,37 @@ const db = require('../../models/index')
 const Course = db.Course
 const Op = db.Sequelize.Op
 router.get('/search',(req,res) => {
+  var offset = 0
+  if(req.query.page != null && req.query.page > 0){
+    offset = 9*(req.query.page - 1)
+  }
     var search = req.query.search
     console.log(Number(search))
     if(isNaN(Number(search))){
-        Course.findAll({
+        Course.findAndCountAll({
             attributes : ['course_no','name','section','teacher'],
             where: {
                 name: {
                     [Op.like]: search +'%'
                 }
-            }
+            },
+            offset: offset,
+            limit: 9
         })
         .then((result)=>{
             //console.log(result)
             res.json(result)
         })
     }else{
-        Course.findAll({
+        Course.findAndCountAll({
             attributes : ['course_no','name','section','teacher'],
             where: {
                 course_no: {
                     [Op.like]: search +'%'
                 }
-                }
+            },
+            offset: offset,
+            limit: 9
         })
         .then((result)=>{
             //console.log(result)
