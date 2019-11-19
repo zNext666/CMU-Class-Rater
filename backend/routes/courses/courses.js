@@ -10,11 +10,6 @@ router.get('',(req,res) => {
     offset = 9*(req.query.page - 1)
   }
     Course.findAndCountAll({
-      include:[{
-        models:db.Review,
-        attributes:['rate'],
-        required: false
-      }],
       attributes : ['course_no','name','section','teacher','description'],
       offset: offset,
       limit: 9
@@ -27,7 +22,11 @@ router.get('',(req,res) => {
   })
 
   router.get('/raw',(req,res)=>{
-    db.sequelize.query("SELECT ( SELECT COUNT(*) FROM courses ) AS COUNT_ROWS, courses.`course_no`, courses.`name`, courses.`teacher`, courses.`section`, courses.`description`, AVG(reviews.`rate`) AS `average` FROM courses LEFT OUTER JOIN reviews ON courses.course_no = reviews.course_no GROUP BY courses.course_no")
+    var offset = 0
+  if(req.query.page != null && req.query.page > 0){
+    offset = 9*(req.query.page - 1)
+  }
+    db.sequelize.query("SELECT ( SELECT COUNT(*) FROM courses ) AS COUNT_ROWS, courses.`course_no`, courses.`name`, courses.`teacher`, courses.`section`, courses.`description`, AVG(reviews.`rate`) AS `average` FROM courses LEFT OUTER JOIN reviews ON courses.course_no = reviews.course_no GROUP BY courses.course_no ORDER BY average DESC LIMIT " + offset +", " + 9)
     .then(result => {
       res.json(result[0])
     })

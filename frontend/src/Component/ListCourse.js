@@ -8,6 +8,7 @@ class ListCourse extends Component{
         super()
         this.state = {
             courses:[],
+            sort: false
         }
     }
 
@@ -19,9 +20,16 @@ class ListCourse extends Component{
     }
 
     async componentWillReceiveProps(nextProps){
-        if(nextProps.sort !=''){
+        if(nextProps.sort =='score'){
             console.log('sort by ' + nextProps.sort)
-            const response = await axios.get('http://localhost:8000/api/courses/test')
+            this.setState({sort:true})
+            const response = await axios.get('http://localhost:8000/api/courses/raw')
+            const data = await response.data
+            this.setState({courses:data})
+            console.log('sort data ', data)
+        }
+        if(this.state.sort){
+            const response = await axios.get('http://localhost:8000/api/courses/raw?page=' + nextProps.page)
             const data = await response.data
             this.setState({courses:data})
             console.log('sort data ', data)

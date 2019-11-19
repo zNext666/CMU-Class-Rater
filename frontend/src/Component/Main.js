@@ -50,6 +50,15 @@ class Main extends Component{
         this.props.Sort(param)
     }
 
+    async componentWillReceiveProps(nextProps){
+        if(nextProps.sort == 'score'){
+            const response = await axios.get('http://localhost:8000/api/courses/raw')
+            const data = await response.data
+            const pages = Math.round((data[0].COUNT_ROWS)/9)
+            this.setState({pages:pages})
+        }
+    }
+
     render(){
         const navstyle = {
             backgroundColor: "#ffffff" , 
@@ -87,7 +96,7 @@ const pages = (
 );
         return (<>
             <br />
-        {console.log('page: '+this.props.page, this.props.sort)}
+        {console.log('page: '+this.props.page)}
             <Row>
                 <Col sm={8}>
                     <Nav variant="pills" defaultActiveKey="/home" onSelect={selectedKey => this.handleSort(selectedKey)}>
@@ -95,7 +104,7 @@ const pages = (
                                 <Nav.Link eventKey="popular" >ความนิยมมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <Nav.Item style={navstyle}>
-                                <Nav.Link eventKey="score" >คะแนนมากที่สุด</Nav.Link>
+                                <Nav.Link eventKey="score" >คะแนนเฉลี่ยมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <NavDropdown title="หน่วยกิต" id="nav-dropdown" style={navstyle}>
                                 <NavDropdown.Item eventKey="credit dsc">มากไปน้อย</NavDropdown.Item>

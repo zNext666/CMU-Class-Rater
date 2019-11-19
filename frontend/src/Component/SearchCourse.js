@@ -7,17 +7,25 @@ class ListCourse extends Component{
         super()
         this.state = {
             courses:[],
-            query:window.location.pathname.split('/')[2]
+            query:window.location.pathname.split('/')[2],
+            sort: false
         }
     }
 
     async componentWillReceiveProps(nextProps){
         console.log(nextProps)
-        if(nextProps.sort !=''){
+        if(nextProps.sort =='score'){
             console.log('sort by ' + nextProps.sort)
-            const response = await axios.get('http://localhost:8000/api/courses/test')
+            this.setState({sort:true})
+            const response = await axios.get('http://localhost:8000/api/courses/raw')
             const data = await response.data
-            this.setState({courses:data.rows})
+            this.setState({courses:data})
+            console.log('sort data ', data)
+        }
+        if(this.state.sort){
+            const response = await axios.get('http://localhost:8000/api/courses/raw?page=' + nextProps.page)
+            const data = await response.data
+            this.setState({courses:data})
             console.log('sort data ', data)
         }else{
             const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query  + '&page=' + nextProps.page)

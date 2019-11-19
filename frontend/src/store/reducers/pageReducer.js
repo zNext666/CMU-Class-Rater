@@ -13,7 +13,8 @@ const pageReducer = (state = initState, action) => {
         case 'SORT':
             console.log('sort', action)
             return {
-                sort: action.payload
+                sort: action.payload,
+                page: 1
             }
         default:
             return state
