@@ -5,3 +5,11 @@ export const changePage = (page) =>{
         })
     }
 }
+
+export const Sort = (sort) =>{
+    return (dispatch) => {
+        dispatch({
+            type:'SORT', payload: sort
+        })
+    }
+}

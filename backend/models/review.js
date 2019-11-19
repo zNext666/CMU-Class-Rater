@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     rate: DataTypes.DOUBLE,
     comment: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
-    course_no: DataTypes.INTEGER
+    course_no: DataTypes.STRING
   }, {});
   Review.associate = function(models) {
     // associations can be defined here
-    Review.belongsTo(models.Course,{foreignKey: 'course_no'});
+    Review.belongsTo(models.Course,{foreignKey: 'course_no'})
     Review.belongsTo(models.User,{foreignKey: 'user_id'});
-    Review.hasMany(models.Like);
+    Review.hasMany(models.Like,{foreignKey: 'review_id'});
   };
   return Review;
 };

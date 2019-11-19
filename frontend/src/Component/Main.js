@@ -6,9 +6,9 @@ import Footer from './Footer'
 import {Nav,Navbar,NavDropdown} from 'react-bootstrap';
 import {Row ,Col}  from 'react-bootstrap';
 import {Pagination } from 'react-bootstrap'
-import {BrowserRouter as Router, Route, Link,Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link,Switch, NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {changePage} from '../store/actions/pageAction'
+import {changePage, Sort} from '../store/actions/pageAction'
 import zIndex from '@material-ui/core/styles/zIndex'
 
 
@@ -18,7 +18,8 @@ class Main extends Component{
         this.state = {
             courses:[],
             pages:'',
-            currentPage: 1
+            currentPage: 1,
+            sort:''
         }
     }
 
@@ -27,11 +28,35 @@ class Main extends Component{
     }
 
     async componentDidMount(){
-        const response = await axios.get('http://localhost:8000/api/courses')
-        const data = await response.data
-        const pages = Math.round((data.count)/9)
-        this.setState({courses:data.rows, pages: pages})     
-        console.log('page: ' + this.state.pages)
+        if(window.location.pathname.search('search') > 0){
+            let searchCourses = axios.get('http://localhost:8000/api/course/search?search=' + window.location.pathname.split('/')[2])
+            .then(res => {
+                const pages = Math.round((res.data.count)/9)
+                this.setState({pages: pages})     
+                console.log('page: ' + this.state.pages)
+            })
+            console.log("search")
+        }else{
+            const response = await axios.get('http://localhost:8000/api/courses')
+            const data = await response.data
+            const pages = Math.round((data.count)/9)
+            this.setState({courses:data.rows, pages: pages})     
+            console.log('page: ' + this.state.pages)
+            console.log("normal")
+        }
+    }
+
+    handleSort = (param) =>{
+        this.props.Sort(param)
+    }
+
+    async componentWillReceiveProps(nextProps){
+        if(nextProps.sort == 'score'){
+            const response = await axios.get('http://localhost:8000/api/courses/raw')
+            const data = await response.data
+            const pages = Math.round((data[0].COUNT_ROWS)/9)
+            this.setState({pages:pages})
+        }
     }
 
     render(){
@@ -58,9 +83,10 @@ for (let number = 1; number <= this.state.pages; number++) {
   items.push(number);
 }
 let bestkub = items.map(i =>{
+    console.log(window.location.pathname)
     return (
-        <Pagination.Item style={{zIndex:0}} id={i} key={i} active={i == this.props.page} onClick={this.handlClick}>{i}</Pagination.Item>
-    )
+            <Pagination.Item style={{zIndex:0}} id={i} key={i} active={i == this.props.page} onClick={this.handlClick}>{i}</Pagination.Item>
+        )      
 })
 
 const pages = (
@@ -68,23 +94,32 @@ const pages = (
     <Pagination>{items}</Pagination>
   </>
 );
-        return (<>
-            <br />
-        {console.log('page: '+this.props.page)}
-            <Row>
-                <Col sm={8}>
-                    <Nav variant="pills" defaultActiveKey="/home">
+const nav = () =>{
+    if(window.location.href.search('search') < 1){
+        return (
+            <Nav variant="pills" defaultActiveKey="/home" onSelect={selectedKey => this.handleSort(selectedKey)}>
                             <Nav.Item style={navstyle}>
-                                <Nav.Link eventKey="link-1">ความนิยม</Nav.Link>
+                                <Nav.Link eventKey="popular" >ความนิยมมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <Nav.Item style={navstyle}>
-                                <Nav.Link eventKey="link-2">คะแนนมากที่สุด</Nav.Link>
+                                <Nav.Link eventKey="score" >คะแนนเฉลี่ยมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <NavDropdown title="หน่วยกิต" id="nav-dropdown" style={navstyle}>
-                                <NavDropdown.Item eventKey="1">มากไปน้อย</NavDropdown.Item>
-                                <NavDropdown.Item eventKey="2">น้อยไปมาก</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="credit dsc">มากไปน้อย</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="credit asc">น้อยไปมาก</NavDropdown.Item>
                             </NavDropdown>
                     </Nav>
+        )
+    }else{
+        return 
+    }
+}
+        return (<>
+            <br />
+        {console.log('page: '+this.props.page, window.location.pathname)}
+            <Row>
+                <Col sm={8}>
+                    {nav()}
                 </Col>
                 <Col sm={4}>
                     <Pagination >
@@ -94,8 +129,8 @@ const pages = (
             </Row>
             <Router>
                 <Switch>
-                    <Route path="/search" component={SearchCourse}></Route>
-                    <Route path="/" render={(props) => <ListCourse {...props} page={this.props.page} />}></Route>
+                    <Route path="/search" render={(props) => <SearchCourse {...props} page={this.props.page} sort={this.props.sort} />}></Route>
+                    <Route path="/" render={(props) => <ListCourse {...props} page={this.props.page} sort={this.props.sort} />}></Route>
                 </Switch>
             </Router>
         </>)
@@ -104,13 +139,15 @@ const pages = (
 
 const mapStateToProps = (state) =>{
     return {
-        page: state.page.page
+        page: state.page.page,
+        sort: state.page.sort
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changePage: (page) => dispatch(changePage(page))
+        changePage: (page) => dispatch(changePage(page)),
+        Sort: (sort) => dispatch(Sort(sort))
     }
 }
 
