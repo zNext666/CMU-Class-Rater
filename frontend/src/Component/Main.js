@@ -94,12 +94,10 @@ const pages = (
     <Pagination>{items}</Pagination>
   </>
 );
-        return (<>
-            <br />
-        {console.log('page: '+this.props.page)}
-            <Row>
-                <Col sm={8}>
-                    <Nav variant="pills" defaultActiveKey="/home" onSelect={selectedKey => this.handleSort(selectedKey)}>
+const nav = () =>{
+    if(window.location.href.search('search') < 1){
+        return (
+            <Nav variant="pills" defaultActiveKey="/home" onSelect={selectedKey => this.handleSort(selectedKey)}>
                             <Nav.Item style={navstyle}>
                                 <Nav.Link eventKey="popular" >ความนิยมมากที่สุด</Nav.Link>
                             </Nav.Item>
@@ -111,6 +109,17 @@ const pages = (
                                 <NavDropdown.Item eventKey="credit asc">น้อยไปมาก</NavDropdown.Item>
                             </NavDropdown>
                     </Nav>
+        )
+    }else{
+        return 
+    }
+}
+        return (<>
+            <br />
+        {console.log('page: '+this.props.page, window.location.pathname)}
+            <Row>
+                <Col sm={8}>
+                    {nav()}
                 </Col>
                 <Col sm={4}>
                     <Pagination >
