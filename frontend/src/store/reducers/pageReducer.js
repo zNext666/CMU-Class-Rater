@@ -1,5 +1,6 @@
 const initState = {
-    page:1
+    page:1,
+    sort:''
 }
 
 const pageReducer = (state = initState, action) => {
@@ -8,6 +9,11 @@ const pageReducer = (state = initState, action) => {
             console.log('change page',action)
             return {
                 page: action.payload
+            }
+        case 'SORT':
+            console.log('sort', action)
+            return {
+                sort: action.payload
             }
         default:
             return state

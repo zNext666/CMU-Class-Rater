@@ -19,6 +19,10 @@ class ListCourse extends Component{
     }
 
     async componentWillReceiveProps(nextProps){
+        if(nextProps.sort !=''){
+            console.log('sort by ' + nextProps.sort)
+        }
+
         const response = await axios.get('http://localhost:8000/api/courses?page=' + nextProps.page)
         console.log('next page ' + nextProps.page)
         const data = await response.data
