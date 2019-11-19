@@ -26,7 +26,7 @@ class App extends Component {
           y: {
             title: {
               formatter: function () {
-                return ''
+                return 'amount of vote,'
               }
             }
           }
@@ -34,7 +34,14 @@ class App extends Component {
 
       
         xaxis: {
-          categories: ['1','2','3','4','5']
+          categories: ['1','2','3','4','5'],
+          labels: {
+            style: {
+              colors: '#FFFFFF',
+              fontSize: '14px'
+            }
+          }
+          
         }
       },
       series: null
