@@ -28,7 +28,7 @@ router.get('',(req,res) => {
   }
   if(req.query.sort == 'credit' && req.query.order != ''){//credit
     Course.findAndCountAll({
-      attributes : ['course_no','name','section','teacher','description', 'credit','view'],
+      attributes : ['course_no','name','section','teacher', 'credit','view'],
       offset: offset,
       limit: 9,
       order: db.sequelize.literal('credit '+req.query.order)
@@ -37,7 +37,7 @@ router.get('',(req,res) => {
     })
     }else if(req.query.sort == 'view'){
       Course.findAndCountAll({
-        attributes : ['course_no','name','section','teacher','description', 'credit', 'view'],
+        attributes : ['course_no','name','section','teacher', 'credit', 'view'],
         offset: offset,
         limit: 9,
         order: db.sequelize.literal('view DESC')
