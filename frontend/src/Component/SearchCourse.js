@@ -53,7 +53,7 @@ class ListCourse extends Component{
                     <Card.Subtitle className="mb-2 text-muted">credit: {item.credit}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">Section: {item.section}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{item.teacher}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">view: {item.view}</Card.Subtitle>
+                    <footer className="blockquote-footer" style={{fontSize: '15px',position:'absolute', right:'30px', bottom:'10px'}} >view: {item.view}</footer>
                 
             </Card.Body>
             </Card></a>
