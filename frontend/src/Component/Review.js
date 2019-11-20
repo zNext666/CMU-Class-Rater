@@ -19,7 +19,7 @@ class Review extends Component{
         this.state = {
             course_no: window.location.pathname.split('/')[2],
             rate:0,
-            review:[],
+            review:null,
             comment:[]
         }
         //this.handleChange = this.handleChange.bind(this)
