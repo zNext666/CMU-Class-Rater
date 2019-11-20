@@ -19,8 +19,8 @@ class Course extends Component{
 
     getCourse = async() =>{
         try {
-            const increaseView = await axios.post('http://localhost:8000/api/course/' + this.state.course_no + '/view', {course_no:this.state.course_no})
-            const response = await axios.get('http://localhost:8000/api/course/' + this.state.course_no)
+            const increaseView = await axios.post('http://35.224.131.27:8000/api/course/' + this.state.course_no + '/view', {course_no:this.state.course_no})
+            const response = await axios.get('http://35.224.131.27:8000/api/course/' + this.state.course_no)
             const data = await response.data
             this.setState({item:data})
             console.log(this.state.item)
@@ -31,7 +31,7 @@ class Course extends Component{
 
     getAvg = async() =>{
         try {
-            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary/average')
+            const response = await axios.get('http://35.224.131.27:8000/api/reviews/' + this.state.course_no + '/summary/average')
             const data = await response.data
             this.setState({avg:data})
             console.log(this.state.avg)
@@ -42,7 +42,7 @@ class Course extends Component{
 
     getSum = async() =>{
         try {
-            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no + '/summary')
+            const response = await axios.get('http://35.224.131.27:8000/api/reviews/' + this.state.course_no + '/summary')
             const data = await response.data
             this.setState({sum:data})
             console.log(this.state.sum)

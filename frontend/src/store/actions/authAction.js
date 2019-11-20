@@ -4,7 +4,7 @@ export const Login = (a) =>{
     return async(dispatch, getState) => {
         let status = 422
         try {
-            const res = await axios.post('http://localhost:8000/api/users/login', a)
+            const res = await axios.post('http://35.224.131.27:8000/api/users/login', a)
             const data = await res.data
             status = await res.status
             console.log(status)
@@ -24,7 +24,7 @@ export const LoginFacebook = (a) =>{
     return async(dispatch, getState) => {
         let status = 422
         try {
-            const res = await axios.post('http://localhost:8000/api/users/login/facebook', a)
+            const res = await axios.post('http://35.224.131.27:8000/api/users/login/facebook', a)
             const data = await res.data
             status = await res.status
             console.log(status)

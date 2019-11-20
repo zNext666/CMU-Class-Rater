@@ -29,7 +29,7 @@ class Main extends Component{
 
     async componentDidMount(){
         if(window.location.pathname.search('search') > 0){
-            let searchCourses = axios.get('http://localhost:8000/api/course/search?search=' + window.location.pathname.split('/')[2])
+            let searchCourses = axios.get('http://35.224.131.27:8000/api/course/search?search=' + window.location.pathname.split('/')[2])
             .then(res => {
                 const pages = Math.round((res.data.count)/9)
                 this.setState({pages: pages})     
@@ -37,7 +37,7 @@ class Main extends Component{
             })
             console.log("search")
         }else{
-            const response = await axios.get('http://localhost:8000/api/courses')
+            const response = await axios.get('http://35.224.131.27:8000/api/courses')
             const data = await response.data
             const pages = Math.round((data.count)/9)
             this.setState({courses:data.rows, pages: pages})     
@@ -52,25 +52,25 @@ class Main extends Component{
 
     async componentWillReceiveProps(nextProps){
         if(nextProps.sort == 'score'){
-            const response = await axios.get('http://localhost:8000/api/courses/raw')
+            const response = await axios.get('http://35.224.131.27:8000/api/courses/raw')
             const data = await response.data
             const pages = Math.round((data[0].COUNT_ROWS)/9)
             this.setState({pages:pages})
         }
         if(nextProps.sort == 'view'){
-            const response = await axios.get('http://localhost:8000/api/courses/raw?sort=view')
+            const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?sort=view')
             const data = await response.data
             const pages = Math.round((data.count)/9)
             this.setState({pages:pages})
         }
         if(nextProps.sort == 'credit DESC'){
-            const response = await axios.get('http://localhost:8000/api/courses/raw?sort=credit&&order=DESC')
+            const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?sort=credit&&order=DESC')
             const data = await response.data
             const pages = Math.round((data.count)/9)
             this.setState({pages:pages})
         }
         if(nextProps.sort == 'credit ASC'){
-            const response = await axios.get('http://localhost:8000/api/courses/raw?sort=credit&&order=ASC')
+            const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?sort=credit&&order=ASC')
             const data = await response.data
             const pages = Math.round((data.count)/9)
             this.setState({pages:pages})

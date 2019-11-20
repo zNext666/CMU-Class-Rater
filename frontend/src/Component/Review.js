@@ -37,7 +37,7 @@ class Review extends Component{
         }
         if(this.state.rate !=0)
         {
-            const res = await axios.post('http://localhost:8000/api/review/course', ncomment)
+            const res = await axios.post('http://35.224.131.27:8000/api/review/course', ncomment)
             const data = await res.data
             store.addNotification({
                 title: "Success!",
@@ -83,7 +83,7 @@ class Review extends Component{
     // func for loading commend
     getComment = async() =>{
         try {
-            const response = await axios.get('http://localhost:8000/api/reviews/' + this.state.course_no)
+            const response = await axios.get('http://35.224.131.27:8000/api/reviews/' + this.state.course_no)
             const data = await response.data
             this.setState({comment:data})
             console.log(this.state.comment)

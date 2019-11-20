@@ -14,7 +14,7 @@ class ListCourse extends Component{
     }
 
     async componentDidMount(){
-        const response = await axios.get('http://localhost:8000/api/courses')
+        const response = await axios.get('http://35.224.131.27:8000/api/courses')
         const data = await response.data
         this.setState({courses:data.rows})
         console.log('first ',this.state.courses)
@@ -26,7 +26,7 @@ class ListCourse extends Component{
             console.log('type',typeof nextProps.sort)
             this.setState({sort: nextProps.sort})
             console.log('sadads ' + this.state.sort)
-            /*const response = await axios.get('http://localhost:8000/api/courses/raw')
+            /*const response = await axios.get('http://35.224.131.27:8000/api/courses/raw')
             const data = await response.data
             this.setState({courses:data})
             console.log('sort data 655', this.state.courses)*/
@@ -35,26 +35,26 @@ class ListCourse extends Component{
         }
         if(this.state.sort != ''){
             if(this.state.sort == 'score'){
-                const response = await axios.get('http://localhost:8000/api/courses/raw?page=' + nextProps.page)
+                const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?page=' + nextProps.page)
                 const data = await response.data
                 this.setState({courses:data})
                 console.log('sort data ', this.state.courses)
             }
             if(this.state.sort == 'view'){
-                const response = await axios.get('http://localhost:8000/api/courses/raw?sort=view&&page=' + nextProps.page)
+                const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?sort=view&&page=' + nextProps.page)
                 const data = await response.data
                 this.setState({courses:data.rows})
                 console.log('sort data ', this.state.courses)
             }
             if(this.state.sort == 'credit DESC' || this.state.sort == 'credit ASC'){
                 let order = this.state.sort.split(' ')[1]
-                const response = await axios.get('http://localhost:8000/api/courses/raw?sort=credit&&order='+ order +'&&page=' + nextProps.page)
+                const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?sort=credit&&order='+ order +'&&page=' + nextProps.page)
                 const data = await response.data
                 this.setState({courses:data.rows})
                 console.log('sort data ', this.state.courses)
             }
         }else{
-            const response = await axios.get('http://localhost:8000/api/courses?page=' + nextProps.page)
+            const response = await axios.get('http://35.224.131.27:8000/api/courses?page=' + nextProps.page)
             console.log('next page ' + nextProps.page)
             const data = await response.data
             this.setState({courses:data.rows})

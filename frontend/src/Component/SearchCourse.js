@@ -17,18 +17,18 @@ class ListCourse extends Component{
         if(nextProps.sort =='score'){
             console.log('sort by ' + nextProps.sort)
             this.setState({sort:true})
-            const response = await axios.get('http://localhost:8000/api/courses/raw')
+            const response = await axios.get('http://35.224.131.27:8000/api/courses/raw')
             const data = await response.data
             this.setState({courses:data})
             console.log('sort data ', data)
         }
         if(this.state.sort){
-            const response = await axios.get('http://localhost:8000/api/courses/raw?page=' + nextProps.page)
+            const response = await axios.get('http://35.224.131.27:8000/api/courses/raw?page=' + nextProps.page)
             const data = await response.data
             this.setState({courses:data})
             console.log('sort data ', data)
         }else{
-            const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query  + '&page=' + nextProps.page)
+            const response = await axios.get('http://35.224.131.27:8000/api/course/search?search=' + this.state.query  + '&page=' + nextProps.page)
             console.log('next page ' + nextProps.page)
             const data = await response.data
             this.setState({courses:data.rows})
@@ -37,7 +37,7 @@ class ListCourse extends Component{
     }
 
     async componentDidMount(){
-        const response = await axios.get('http://localhost:8000/api/course/search?search=' + this.state.query)
+        const response = await axios.get('http://35.224.131.27:8000/api/course/search?search=' + this.state.query)
         const data = await response.data
         this.setState({courses:data.rows})
         console.log(this.state.query, this.state.courses)
