@@ -19,7 +19,7 @@ class Review extends Component{
         this.state = {
             course_no: window.location.pathname.split('/')[2],
             rate:0,
-            review:[],
+            review:null,
             comment:[]
         }
         //this.handleChange = this.handleChange.bind(this)
@@ -35,24 +35,44 @@ class Review extends Component{
             course_no: this.state.course_no,
             comment: this.state.review
         }
-        const res = await axios.post('http://localhost:8000/api/review/course', ncomment)
-        const data = await res.data
-        store.addNotification({
-            title: "Success!",
-            message: sessionStorage.getItem('auth') + ' comment success!',
-            type: "success",
-            insert: "top",
-            container: "top-right",
-            animationIn: ["animated", "fadeIn"],
-            animationOut: ["animated", "fadeOut"],
-            dismiss: {
-              duration: 4000,
-              onScreen: true
-            }
-          });
-          this.setState({review:'',rate:0})
-          this.getComment()
-          console.log(data)
+        if(this.state.rate !=0)
+        {
+            const res = await axios.post('http://localhost:8000/api/review/course', ncomment)
+            const data = await res.data
+            store.addNotification({
+                title: "Success!",
+                message: sessionStorage.getItem('auth') + ' comment success!',
+                type: "success",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                dismiss: {
+                  duration: 4000,
+                  onScreen: true
+                }
+              });
+              this.setState({review:'',rate:0})
+              this.getComment()
+              console.log(data)
+        }
+        else
+        {
+            store.addNotification({
+                title: "Error!",
+                message:'Please rate score',
+                type: "danger",
+                insert: "top",
+                container: "top-right",
+                animationIn: ["animated", "fadeIn"],
+                animationOut: ["animated", "fadeOut"],
+                click: true,
+                dismiss: {
+                    duration: 2000,
+                    onScreen: true
+                }
+        });
+        }
     }
 
     handleChange(e,newValue){
@@ -111,11 +131,7 @@ class Review extends Component{
                     <h5>{comm.User.username}</h5>
                     <Navbar>
                         <Rating value={comm.rate} readOnly />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" color={color} >
-                                <ThumbUpAlt />
-                            </IconButton>
-                        </ListItemSecondaryAction>
+                        
                     </Navbar>
                     <p>{comm.comment}</p>
                 </Box>

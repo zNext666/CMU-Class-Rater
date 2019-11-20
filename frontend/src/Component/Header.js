@@ -84,7 +84,7 @@ class Header extends Component{
 
     navigateProfile = () =>{
         if(sessionStorage.getItem('auth')){
-            return '/profile'
+            return '/'
         }else{
             return '/login'
         }
