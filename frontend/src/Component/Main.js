@@ -57,6 +57,24 @@ class Main extends Component{
             const pages = Math.round((data[0].COUNT_ROWS)/9)
             this.setState({pages:pages})
         }
+        if(nextProps.sort == 'view'){
+            const response = await axios.get('http://localhost:8000/api/courses/raw?sort=view')
+            const data = await response.data
+            const pages = Math.round((data.count)/9)
+            this.setState({pages:pages})
+        }
+        if(nextProps.sort == 'credit DESC'){
+            const response = await axios.get('http://localhost:8000/api/courses/raw?sort=credit&&order=DESC')
+            const data = await response.data
+            const pages = Math.round((data.count)/9)
+            this.setState({pages:pages})
+        }
+        if(nextProps.sort == 'credit ASC'){
+            const response = await axios.get('http://localhost:8000/api/courses/raw?sort=credit&&order=ASC')
+            const data = await response.data
+            const pages = Math.round((data.count)/9)
+            this.setState({pages:pages})
+        }
     }
 
     render(){
@@ -99,14 +117,14 @@ const nav = () =>{
         return (
             <Nav variant="pills" defaultActiveKey="/home" onSelect={selectedKey => this.handleSort(selectedKey)}>
                             <Nav.Item style={navstyle}>
-                                <Nav.Link eventKey="popular" >ความนิยมมากที่สุด</Nav.Link>
+                                <Nav.Link eventKey="view" >ความนิยมมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <Nav.Item style={navstyle}>
                                 <Nav.Link eventKey="score" >คะแนนเฉลี่ยมากที่สุด</Nav.Link>
                             </Nav.Item>
                             <NavDropdown title="หน่วยกิต" id="nav-dropdown" style={navstyle}>
-                                <NavDropdown.Item eventKey="credit dsc">มากไปน้อย</NavDropdown.Item>
-                                <NavDropdown.Item eventKey="credit asc">น้อยไปมาก</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="credit DESC">มากไปน้อย</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="credit ASC">น้อยไปมาก</NavDropdown.Item>
                             </NavDropdown>
                     </Nav>
         )
