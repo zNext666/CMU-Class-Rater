@@ -102,7 +102,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: "261498	",
+      course_no: "261498",
       name: 'Selected Topics in Computer Networks',
       section: 11,
       teacher:'Yutthapong Somchit',
@@ -120,7 +120,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: "207105	",
+      course_no: "207105",
       name: 'Physics for Engineering and Agro Industry Students 1',
       section: 11,
       teacher:'Co-Instructor',
@@ -246,7 +246,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: "261342	",
+      course_no: "261342",
       name: 'Fundamentals of Database Systems',
       section: 1,
       teacher:'Juggapong Natwichai	',
