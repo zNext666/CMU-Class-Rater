@@ -64,13 +64,13 @@ class ListCourse extends Component{
 
     render(){
         const course = this.state.courses.map((item) => (
-            <a href={"review/"+ item.course_no} ><Card key={item.course_no} style={{ width: '17rem' , border: "3px solid lightgrey",height:'14rem',borderRadius: "10px" ,margin: "5px",}}>
+            <a href={"review/"+ item.course_no} ><Card key={item.course_no} style={{ width: '17rem' , border: "3px solid lightgrey",borderRadius: "10px" ,margin: "5px",}}>
                 <Card.Body>
                     <Card.Title>{item.course_no} {item.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">credit: {item.credit}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">Section: {item.section}</Card.Subtitle>
                     <Card.Subtitle className="mb-2 text-muted">{item.teacher}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">view: {item.view}</Card.Subtitle>
+                    <footer className="blockquote-footer" style={{fontSize: '15px',position:'absolute', right:'30px', bottom:'10px'}} >view: {item.view}</footer>
             </Card.Body>
             </Card></a>
         ))
