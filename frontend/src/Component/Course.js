@@ -4,6 +4,7 @@ import axios from 'axios'
 import Chart from './Chart'
 import Rating from '@material-ui/lab/Rating';
 import {Row ,Col}  from 'react-bootstrap';
+import { isNull } from 'util';
 
 class Course extends Component{
     constructor() {
@@ -84,7 +85,7 @@ class Course extends Component{
                     <Card.Text>
                     <Col>
                     <Row>
-                        Average: {isNaN(this.state.avg.average) ? parseFloat(this.state.avg.average).toFixed(2) : 'No average'}
+                        Average: {!isNull(this.state.avg.average) ? parseFloat(this.state.avg.average).toFixed(2) : 'No average'}
                     </Row>
                     <Row>
                         <Rating name="half-rating" value={this.state.avg.average} precision={0.1} readOnly />
