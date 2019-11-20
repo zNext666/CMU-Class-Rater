@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Card,CardColumns   } from 'react-bootstrap'
+import { Card,CardColumns,CardDeck,CardGroup     } from 'react-bootstrap'
 import {Container,Row,Col}  from 'react-bootstrap'
 import { isNull, isUndefined } from 'util'
 
@@ -64,7 +64,7 @@ class ListCourse extends Component{
 
     render(){
         const course = this.state.courses.map((item) => (
-            <a href={"review/"+ item.course_no} ><Card key={item.course_no} style={{ width: '18rem' , border: "3px solid lightgrey",height:'14rem',borderRadius: "10px" }}>
+            <a href={"review/"+ item.course_no} ><Card key={item.course_no} style={{ width: '17rem' , border: "3px solid lightgrey",height:'14rem',borderRadius: "10px" ,margin: "5px",}}>
                 <Card.Body>
                     <Card.Title>{item.course_no} {item.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">credit: {item.credit}</Card.Subtitle>
@@ -76,9 +76,9 @@ class ListCourse extends Component{
         ))
         return (
             <>
-                <CardColumns>
+                <CardDeck>
                     {course}
-                </CardColumns>
+                </CardDeck>
             </>
         )
     }
