@@ -12,7 +12,7 @@ router.get('/search',(req,res) => {
     console.log(Number(search))
     if(isNaN(Number(search))){
         Course.findAndCountAll({
-            attributes : ['course_no','name','section','teacher'],
+            attributes : ['course_no','name','section','teacher','description', 'credit','view'],
             where: {
                 name: {
                     [Op.like]: search +'%'
@@ -27,7 +27,7 @@ router.get('/search',(req,res) => {
         })
     }else{
         Course.findAndCountAll({
-            attributes : ['course_no','name','section','teacher'],
+            attributes : ['course_no','name','section','teacher','description', 'credit','view'],
             where: {
                 course_no: {
                     [Op.like]: search +'%'
