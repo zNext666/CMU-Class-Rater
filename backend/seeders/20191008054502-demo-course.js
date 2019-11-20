@@ -102,8 +102,8 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: "261498	",
-      name: 'ENG: Selected Topics in Computer Networks',
+      course_no: "261498",
+      name: 'Selected Topics in Computer Networks',
       section: 11,
       teacher:'Yutthapong Somchit',
       description:'Selected topics of current interests and new developments in various fields of computer networking.',
@@ -120,8 +120,8 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: "207105	",
-      name: 'Physics for Engineering and Agro-Industry Students 1',
+      course_no: "207105",
+      name: 'Physics for Engineering and Agro Industry Students 1',
       section: 11,
       teacher:'Co-Instructor',
       description:' Structure and domain of physics. Newton’s laws of motion, motion of objects, work and energy, motion of rigid bodies. Properties of matter. Hydrostatics and hydrodynamics. Vibrations and waves. Nature of sound wave. Temperature and heat. Thermodynamics and kinetic theory.',
@@ -246,7 +246,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
-      course_no: "261342	",
+      course_no: "261342",
       name: 'Fundamentals of Database Systems',
       section: 1,
       teacher:'Juggapong Natwichai	',

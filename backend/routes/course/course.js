@@ -56,6 +56,7 @@ router.get('/:course_no',(req,res) => {
         course_no:req.params.course_no
       }
     }).then((data) => {
+      console.log(data)
       res.json(data)
     })
   })

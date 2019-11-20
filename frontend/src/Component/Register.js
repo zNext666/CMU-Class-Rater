@@ -87,7 +87,7 @@ class Register extends Component{
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="formGroupUsername">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Username" onChange={this.username}/>
+                            <Form.Control type="text" placeholder="Enter Username least 6 characters" onChange={this.username}/>
                         </Form.Group>
                         <Form.Group controlId="formGroupEmail">
                             <Form.Label>Email</Form.Label>
@@ -95,7 +95,7 @@ class Register extends Component{
                         </Form.Group>
                         <Form.Group controlId="formGroupPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" onChange={this.pwd}/>
+                            <Form.Control type="password" placeholder="Enter Password least 6 characters" onChange={this.pwd}/>
                         </Form.Group>
                         <Form.Group controlId="formGroupConfirmPassword">
                             <Form.Label>Confirm-Password</Form.Label>
