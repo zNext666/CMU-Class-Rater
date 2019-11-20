@@ -131,11 +131,7 @@ class Review extends Component{
                     <h5>{comm.User.username}</h5>
                     <Navbar>
                         <Rating value={comm.rate} readOnly />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" color={color} >
-                                <ThumbUpAlt />
-                            </IconButton>
-                        </ListItemSecondaryAction>
+                        
                     </Navbar>
                     <p>{comm.comment}</p>
                 </Box>

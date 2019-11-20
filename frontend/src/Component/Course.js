@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Alert } from 'react-bootstrap'
 import axios from 'axios'
 import Chart from './Chart'
 import Rating from '@material-ui/lab/Rating';
@@ -84,12 +84,14 @@ class Course extends Component{
                     </Card.Text>
                     <Card.Text>
                     <Col>
+                    <Alert variant="info">
                     <Row>
                         Average: {!isNull(this.state.avg.average) ? parseFloat(this.state.avg.average).toFixed(2) : 'No average'}
                     </Row>
                     <Row>
                         <Rating name="half-rating" value={this.state.avg.average} precision={0.1} readOnly />
                     </Row>
+                    </Alert>
                     </Col>
                     
                     </Card.Text>
