@@ -45,7 +45,7 @@ router.get('',(req,res) => {
         res.json(data)
       })
     }else{
-    db.sequelize.query("SELECT ( SELECT COUNT(*) FROM courses ) AS COUNT_ROWS, courses.`course_no`, courses.`credit`, courses.`name`,courses.`view`, courses.`teacher`, courses.`section`, courses.`description`, AVG(reviews.`rate`) AS `average` FROM courses LEFT OUTER JOIN reviews ON courses.course_no = reviews.course_no GROUP BY courses.course_no ORDER BY average DESC LIMIT " + offset +", " + 9)
+    db.sequelize.query("SELECT ( SELECT COUNT(*) FROM Courses ) AS COUNT_ROWS, Courses.`course_no`, Courses.`credit`, Courses.`name`,Courses.`view`, Courses.`teacher`, Courses.`section`, Courses.`description`, AVG(Reviews.`rate`) AS `average` FROM Courses LEFT OUTER JOIN Reviews ON Courses.course_no = Reviews.course_no GROUP BY Courses.course_no ORDER BY average DESC LIMIT " + offset +", " + 9)
     .then(result => {
       res.json(result[0])
     })}

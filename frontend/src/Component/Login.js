@@ -31,7 +31,7 @@ class LoginComponent extends Component{
 
     submitHandler = (e) =>{
         e.preventDefault() 
-        //const response = axios.post('http://35.224.131.27:8000/api/users/login')
+        //const response = axios.post('https://cmuclassrater.engineer/api/api/users/login')
         this.props.Login(this.state)  
     }
 

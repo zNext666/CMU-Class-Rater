@@ -1,6 +1,9 @@
 # CMU Class Rater
 CMU Class Rater is a web-applicatetion project in software engineering course 2019
 
+## Demo
+[CMU Class Rater](https://www.cmuclassrater.engineer)
+
 ## Installation
 
 Use the package manager [npm] to install dependencies.

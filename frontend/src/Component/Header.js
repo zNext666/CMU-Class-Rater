@@ -33,7 +33,7 @@ class Header extends Component{
 
     getData = async () => {     
         try {
-            const response = await axios.get('http://35.224.131.27:8000/api/course/search?search=' + this.state.query)
+            const response = await axios.get('https://cmuclassrater.engineer/api/course/search?search=' + this.state.query)
             const data = await response.data
             this.setState({data:data.rows})
             console.log(this.state.data)
